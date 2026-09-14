@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title id="pageTitle">Dungeon World - Ficha de Personagem </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="./css/style.css" />    
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script>
+      if ('serviceWorker' in navigator)
+        navigator.serviceWorker.register('./service-worker.js');
+    </script>
+    <script type="module" src="./js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
+  </head>
+
+  <body>
+    <nav class="floating-nav" >
+      <img src="./assets/blades-logo-red.png" class="logo" alt="Logo" />
+
+        <div style="display:none;">
+          <button class="nav-item active" data-section="character">
+              <span>Character</span>
+          </button>
+
+          <button class="nav-item" data-section="attributes">
+              <span>Attributes</span>
+          </button>
+
+          <button class="nav-item" data-section="moves">
+              <span>Moves</span>
+          </button>
+
+          <button class="nav-item" data-section="equipment">
+              <span>Equipment</span>
+          </button>
+
+          <button class="nav-item" data-section="spells">
+              <span>Spells</span>
+          </button>
+
+          <button class="nav-item" data-section="notes">
+              <span>Notes</span>
+          </button>
+        </div>
+        <div class="nav-item" id="GM-Mode">
+          
+        </div>
+        <div class="save_buttons">
+          <button id="btnGerarCodigo">Salvar ficha</button>
+          <button id="btnRestaurar">Restaurar ficha</button>
+          <button id="btnLimpar">Limpar ficha</button>
+        </div>
+    </nav>
+
+    <main id="main">
+      <article id="art-character-info">
+        <section id="characterSection" class="section-character-info">
+          <div id="nome" class="input-field">
+            <input type="text" id="input-nome">
+            <label for="input-nome">Nome</label>
+          </div>
+          <div id="vicios" class="input-field">
+            <input type="text" id="input-vicios">
+            <label for="input-vicios">Vícios</label>
+          </div>
+          <details class="character-extra-fields" open>
+            <summary aria-label="Mostrar ou ocultar campos adicionais"></summary>
+            <div id="bando" class="input-field">
+              <input type="text" id="input-bando">
+              <label for="input-bando">bando</label>
+            </div>
+            <div id="alcunha" class="input-field">
+              <input type="text" id="input-alcunha">
+              <label for="input-alcunha">Alcunha</label>
+            </div>
+            <div id="aparencia" class="input-field">
+              <input type="text" id="input-aparencia">
+              <label for="input-aparencia">Aparencia</label>
+            </div>
+            <div id="background" class="input-field">
+              <input type="text" id="input-background">
+              <label for="input-background">Raizes</label>
+            </div>
+            <div id="historia" class="input-field">
+              <input type="text" id="input-historia">
+              <label for="input-historia">Historico</label>
+            </div>
+          </details>
+        </section>
+        <section id="characterStressTrauma" class="section-stress-trauma">
+          <div id="stressContainer" class="stress">
+             <span class="header-label">Estresse</span>
+              <div id="stressBannerContainer" class="bannerContainer">
+              </div>
+          </div>
+          <div id="traumaContainer" class="trauma">
+              <span class="header-label">Trauma</span>
+              <div id="traumaBannerContainer" class="bannerContainer">
+
+              </div>
+          </div>
+        </section>
+        <section id="characterCondition" class="section-condition">
+          <div id="damageContainer">
+              <span class="damage-header">Dano</span>
+            <div class="damage-box">
+              <div><span>3</span><input type="text" id="damage-1" class="damage critical"><span class="damage-effect">Prec. Ajuda</span></div>
+              <div><span>2</span><input type="text" id="damage-2" class="damage"><input type="text" id="damage-3" class="damage"><span class="damage-effect">-1d</span></div>
+              <div><span>1</span><input type="text" id="damage-4" class="damage"><input type="text" id="damage-5" class="damage"><span class="damage-effect">Efeito Red.</span></div>
+            </div>
+          </div>
+          <div id="cureContainer">
+            <span class="header-label">Cura</span>
+            <div class="cure-box">
+              <input type="checkbox" id="cure-1" class="cure">
+              <input type="checkbox" id="cure-2" class="cure">
+              <input type="checkbox" id="cure-3" class="cure">
+              <input type="checkbox" id="cure-4" class="cure">
+            </div>
+          </div>
+          <div id="armorContainer">
+            <span class="header-label">Armadura</span>
+            <div class="armor-box">
+              <label for="armor-1">Armadura</label><input type="checkbox" id="armor-1" class="armor">
+              <label for="armor-2">Pesada</label><input type="checkbox" id="armor-2" class="armor">
+              <label for="armor-3">Especial</label><input type="checkbox" id="armor-3" class="armor">
+            </div>
+          </div>
+        </section>
+      </article>
+
+      <article id="abilities-article">
+        <section id="abilities-actions" class="section-abilities-actions">
+        </section>
+      </article>
+
+      <article id="art-playbook">
+        <section id="playbookMovesContainer" class="section-playbook-moves">
+          <div id="playbook-header-selector" class="playbook-header-selector">
+            <select id="playbookSelector" class="playbook-selector">
+                <option value="">Selecione o playbook</option>
+            </select>
+          </div>
+          <div id="movementContainer" class="movement-container">
+            <span>Habilidades Especias</span>
+
+          </div>
+          <div id="commonMovementContainer" class="movement-container">
+            <button>Adicionar Movimento</button>
+          </div>
+        </section>
+        <section id="amigosContainer" class="section-amigos-estranhos">
+        </section>
+        <section id="itensContainer" class="section-playbook-itens">
+        </section>
+        <section id="xpContainer" class="section-playbook-xp">
+        </section>
+      </article>
+
+
+    </main>
+
+    <!-- Modais são criados dinamicamente pela classe Modal (js/modal.js) -->
+    <div id="modalsContainer"></div>
+
+    <footer class="rodape"> 
+      <p>Desenvolvido por <a href="https://github.com/DennisCCunha" target="_blank"><strong>Brocolis.ninja</strong></a></p>
+      <p>Blades in the Dark™ is a trademark of One Seven Design. The Forged in the Dark Logo is © One Seven Design, and is used with permission</p>
+    </footer>
+
+  </body>
+</html>

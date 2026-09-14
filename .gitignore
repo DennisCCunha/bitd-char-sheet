@@ -1,0 +1,46 @@
+# ── Dependencies ─────────────────────────────────────────────────────────────
+node_modules/
+package-lock.json
+yarn.lock
+bun.lockb
+
+# ── Build / dist ──────────────────────────────────────────────────────────────
+dist/
+build/
+out/
+
+# ── Environment ───────────────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── OS ────────────────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── Editors ───────────────────────────────────────────────────────────────────
+.vscode/settings.json
+.idea/
+*.suo
+*.user
+
+# ── Logs / temp ───────────────────────────────────────────────────────────────
+*.log
+*.tmp
+*.bak
+
+# ── Project-specific ─────────────────────────────────────────────────────────
+# Backup / draft scripts left in js/
+js/script copy.js
+
+# Python cache from utilities/
+utilities/__pycache__/
+utilities/*.pyc
+
+.github/*
+
+package.json
+package-lock.json
+
+AGENTS.md

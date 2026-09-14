@@ -1,0 +1,356 @@
+{
+    "playbooks": ["Aranha", "Cão de Caça", "Doutor", "Furtivo", "Retalhador", "Suave", "Sussurro", "Casco", "Fantasma","Vampiro"],
+
+    "actions": [],
+
+
+    "playbook":[
+        { "nome":"Aranha", "acoes": {
+                "Estudar": 1,
+                "Socializar": 2
+            },
+            "contatos-label": "Amigos Ardilosos",
+            "contatos": [
+                "Silas, Negociante de informações",
+                "Augus, Mestre arquiteto",
+                "Jennah, Camareira",
+                "Riven, Quimica",
+                "Jeren, Casaca azul arquivista"
+            ]
+        },
+        { "nome":"Cão de Caça", "acoes": {
+                "Caçar": 2,
+                "Sondar": 1
+            },
+            "contatos-label": "Amigos Mortais",
+            "contatos": [
+                "Steiner, assassino",
+                "Celene, sentinela",
+                "Melvir, médico",
+                "Veleris, espiã",
+                "Casta, caçadora de recompensas"
+            ]
+        },
+        { "nome":"Doutor", "acoes": {
+                "Adulterar": 2,
+                "Detonar": 1
+            },
+            "contatos-label": "Amigos Astutos",
+            "contatos": [
+                "Stazia, apotecária",
+                "Veldren, psiconauta",
+                "Eckerd, ladrão de cadáveres",
+                "Jul, traficante de sangue",
+                "Malista, sacerdotisa"
+            ]
+        },
+        { "nome":"Furtivo", "acoes": {
+                "Estudar": 1,
+                "Socializar": 2
+            },
+            "contatos-label": "Amigos Suspeitos",
+            "contatos": [
+                "Telda, mendiga",
+                "Darmot, Casaca Azul",
+                "Frake, chaveiro",
+                "Roslyn Kellis, aristocrata",
+                "Petra, funcionária da prefeitura"
+            ]
+        },
+        { "nome":"Retalhador", "acoes": {
+                "Brigar": 2,
+                "Comandar": 1
+            },
+            "contatos-label": "Amigos Perigosos",
+            "contatos": [
+                "Marlane, pugilista",
+                "Chael, bandido cruel",
+                "Mercy, assassina fria",
+                "Grace, assaltante",
+                "Sawtooth, médico"
+            ]
+        },
+        { "nome":"Suave", "acoes": {
+                "Convencer": 2,
+                "Socializar": 1
+            },
+            "contatos-label": "Amigos Espertos",
+            "contatos": [
+                "Bryl, traficante",
+                "Bazso Baz, líder de gangue",
+                "Klyra, dona de taverna",
+                "Nyryx, prostituto(a)",
+                "Harker, presidiário reincidente"
+            ]
+        },
+        { "nome":"Sussurro", "acoes": {
+                "Estudar": 1,
+                "Sintonizar": 2
+            },
+            "contatos-label": "Amigos Estranhos",
+            "contatos": [
+                "Nyryx, fantasma possessor",
+                "Scurlock, vampiro",
+                "Setarra, demônio",
+                "Quellyn, perita em bruxaria",
+                "Flint, traficante de espíritos"
+            ]
+        }
+    ],
+
+
+    "habilidades": [
+        {"id":"100001", "playbook":"Comum", "level": 3,"nome":"Veterano", "descricao":"Escolha uma habilidade especial de outra fonte"},
+        {"id":"100002", "playbook":"Sussurro", "level": 1, "nome":"Compelir", "descricao":"Você pode se Sintonizar ao campo fantasmagórico para forçar um fantasma da região a aparecer e obedecer a uma ordem dada por você. Você não é afetado pelo terror sobrenatural do fantasma convocado ou compelido (mas os seus aliados possam ser)."},
+        {"id":"100003", "playbook":"Sussurro", "level": 1, "nome":"Mente Fantasmagórica", "descricao":"Você sempre percebe a presença de entidades sobrenaturais ao seu redor e recebe +1d para levantar informações sobre assuntos sobrenaturais."},
+        {"id":"100004", "playbook":"Sussurro", "level": 1, "nome":"Vontade de Ferro", "descricao":"Você recebe +1d em rolagens de resistência realizadas com Convicção e é imune ao terror provocado pela presença de entidades sobrenaturais."},
+        {"id":"100005", "playbook":"Sussurro", "level": 1, "nome":"Ocultista", "descricao":"Você conhece os modos secretos para Socializar com poderes antigos, deuses esquecidos e demônios. Após socializar com um deles, você recebe +1d para Comandar cultistas que sejam devotos dessa entidade."},
+        {"id":"100006", "playbook":"Sussurro", "level": 1, "nome":"Ritualista", "descricao":"Você conhece os métodos arcanos usados na feitiçaria ritual. Você pode Estudar um ritual arcano (ou criar um novo) para invocar um efeito ou entidade sobrenatural. Além disso, você possui um ritual conhecido."},
+        {"id":"100007", "playbook":"Sussurro", "level": 1, "nome":"Metodologia Estranha", "descricao":"Quando inventa ou cria algo com características arcanas, você ganha +1 nível de resultado na rolagem. Além disso, você já conhece um esquema arcano."},
+        {"id":"100008", "playbook":"Sussurro", "level": 1, "nome":"Tempestade", "descricao":"Você pode usar esforço extra para realizar qualquer uma das seguintes proezas: disparar um relâmpago como uma arma, ou invocar uma tempestade nos seus arredores imediatos (chuva forte, ventos uivantes, névoa espessa, frio e neve, etc.)."},
+        {"id":"100009", "playbook":"Sussurro", "level": 1, "nome":"Corpo Fechado", "descricao":"Você pode usar a sua armadura especial para resistir a uma consequência sobrenatural ou para fazer um esforço extra ao lidar com forças arcanas."},
+
+        {"id":"100010", "playbook":"Suave","level":"1", "nome":"Roque do Rei", "descricao":"Sofra 2 de estresse para rolar o seu melhor valor de ação mesmo quando estiver executando uma ação diferente. Descreva como você adapta a sua perícia a esse novo uso."},
+        {"id":"100011", "playbook":"Suave","level":"1", "nome":"Manto & Adaga", "descricao":"Você recebe +1d em rolagens para confundir ou evitar suspeita sempre que usa um disfarce ou outras formas de distração. Quando revela o seu disfarce, você pode usar a surpresa para ganhar a iniciativa na situação."},
+        {"id":"100012", "playbook":"Suave","level":"1", "nome":"Voz Fantasmagórica", "descricao":"Você conhece o método secreto para interagir com fantasmas e demônios de forma similar a humanos, independentemente do quão ferozes ou animalescos eles pareçam. Você recebe potência quando se comunica com forças sobrenaturais."},
+        {"id":"100013", "playbook":"Suave","level":"1", "nome":"Olhar da Verdade", "descricao":"Você sempre percebe quando mentem para você."},
+        {"id":"100014", "playbook":"Suave","level":"1", "nome":"Negócios Informais", "descricao":"Você adiciona +2 ao seu tesouro ao final de cada fase de folga."},
+        {"id":"100015", "playbook":"Suave","level":"1", "nome":"Hipnotismo", "descricao":"Quando Convence alguém, você pode fazer com que ela esqueça o ocorrido até que o encontre novamente."},
+        {"id":"100016", "playbook":"Suave","level":"1", "nome":"Subterfúgio", "descricao":"Você pode usar a sua armadura especial para resistir a uma consequência de suspeita ou persuasão, ou para fazer esforço extra em enganação ou subterfúgio."},
+        {"id":"100017", "playbook":"Suave","level":"1", "nome":"Confie em Mim", "descricao":"Você recebe +1d em rolagens realizadas contra um alvo se possuir uma relação íntima com ele."},
+
+        {"id":"100018", "playbook":"Retalhador","level":"1", "nome":"Nascido para Lutar", "descricao":"Você pode usar a sua armadura especial para reduzir o dano de um ataque em combate, ou para fazer um esforço extra durante uma luta."},
+        {"id":"100019", "playbook":"Retalhador","level":"1", "nome":"Guarda-Costas", "descricao":"Você recebe +1d na rolagem de resistência quando protege um companheiro de equipe. Você também recebe +1 efeito quando levanta informações para antecipar possíveis ameaças para o presente."},
+        {"id":"100020", "playbook":"Retalhador","level":"1", "nome":"Guerreiro Fantasmagórico", "descricao":"Você pode imbuir as suas mãos, armas brancas ou ferramentas com energias espirituais, recebendo potência em combates contra alvos sobrenaturais. Você pode agarrar espíritos para detê-los e capturá-los."},
+        {"id":"100021", "playbook":"Retalhador","level":"1", "nome":"Líder", "descricao":"Você é capaz de Comandar um parceiro em combate de forma extremamente efetiva, concedendo-o +1 efeito e 1 armadura. Ele também continua lutando mesmo se estiver arrasado (ou seja, não é removido do combate quando sofre um dano de nível 3)."},
+        {"id":"100022", "playbook":"Retalhador","level":"1", "nome":"Mula de Carga", "descricao":"Os seus limites de carga são maiores. Leve: 5. Normal: 7. Pesado: 8."},
+        {"id":"100023", "playbook":"Retalhador","level":"1", "nome":"Trate com Respeito", "descricao":"Você pode usar esforço extra para realizar qualquer uma das seguintes proezas: executar façanha de força física quase sobrenatural — lutar corpo a corpo com uma gangue pequena em pé de igualdade."},
+        {"id":"100024", "playbook":"Retalhador","level":"1", "nome":"Brutal", "descricao":"As suas explosões de violência aterrorizam todos por perto. Você recebe +1d sempre que Comandar um alvo assustado."},
+        {"id":"100025", "playbook":"Retalhador","level":"1", "nome":"Robusto", "descricao":"Você se recupera rapidamente de ferimentos. Avance permanentemente uma parte do seu relógio de recuperação, e receba +1d em quaisquer rolagens de recuperação."},
+
+        {"id":"100026", "playbook":"Furtivo","level":"1", "nome":"Infiltrador", "descricao":"Você não é afetado por qualidade ou Categoria ao enfrentar medidas de segurança."},
+        {"id":"100027", "playbook":"Furtivo","level":"1", "nome":"Emboscada", "descricao":"Recebe +1d na rolagem quando ataca de uma posição escondida."},
+        {"id":"100028", "playbook":"Furtivo","level":"1", "nome":"Destemido", "descricao":"Você pode escolher receber +1d quando fizer uma rolagem de ação desesperada. Se fizer isso, você também sofre -1d em qualquer rolagem de resistência em resposta."},
+        {"id":"100029", "playbook":"Furtivo","level":"1", "nome":"Dança do Diabo", "descricao":"Você pode fazer esforço extra para realizar qualquer uma das seguintes proezas: executar um feito de atletismo quase sobrenatural — esquivar dos seus inimigos fazendo com que ataquem uns aos outros."},
+        {"id":"100030", "playbook":"Furtivo","level":"1", "nome":"Competência", "descricao":"Escolha uma ação ao receber essa habilidade. Quando liderar ações de grupo que utilizem essa ação, você sofre no máximo 1 de estresse, independente da quantidade de rolagens ruins dos seus companheiros."},
+        {"id":"100031", "playbook":"Furtivo","level":"1", "nome":"Véu Fantasma", "descricao":"Você pode se deslocar parcialmente para o campo fantasmagórico, tornando-se sombrio e insubstancial por alguns momentos. Esse deslocamento causa 2 de estresse, mais 1 de estresse para cada benefício adicional a seguir: o deslocamento dura por alguns minutos ao invés de momentos – você se torna invisível ao invés de sombrio – você pode flutuar através do ar como um fantasma."},
+        {"id":"100032", "playbook":"Furtivo","level":"1", "nome":"Reflexos", "descricao":"Sempre que perguntarem quem age primeiro a resposta será sempre a mesma: você. (Dois personagens com Reflexos agem simultaneamente)."},
+        {"id":"100033", "playbook":"Furtivo","level":"1", "nome":"Sombra", "descricao":"Você pode usar a sua armadura especial para resistir a uma consequência de detecção ou medidas de segurança, ou para fazer esforço extra em atos de atletismo ou furtividade."},
+
+        {"id":"100034", "playbook":"Doutor", "level":"1", "nome":"Alquimista", "descricao":"Quando inventa ou cria algo com características alquímicas, você recebe +1 nível de resultado na rolagem (um resultado de 1 a 3 torna-se 4 ou 5, um 4 ou 5 torna-se 6, etc.). Além disso, você conhece uma fórmula especial."},
+        {"id":"100035", "playbook":"Doutor", "level":"1", "nome":"Analista", "descricao":"Durante cada folga, você pode avançar duas vezes relógios de projetos de longo prazo envolvendo investigação ou aprendizado de um novo design ou fórmula."},
+        {"id":"100036", "playbook":"Doutor", "level":"1", "nome":"Artífice", "descricao":"Quando inventa ou cria algo com características de faiscaria, você ganha +1 nível de resultado da sua rolagem (um resultado de 1 a 3 torna-se 4 ou 5, um 4 ou 5 torna-se 6, etc.). Além disso, você conhece um design especial."},
+        {"id":"100037", "playbook":"Doutor", "level":"1", "nome":"Fortitude", "descricao":"Você pode usar a sua armadura especial para resistir a uma consequência de fadiga, fraqueza ou efeitos químicos, ou para fazer esforço extra ao empregar a perícia técnica ou alquimia."},
+        {"id":"100038", "playbook":"Doutor", "level":"1", "nome":"Proteção Fantasmagórica", "descricao":"Você pode Detonar uma área usando substâncias arcanas, tornando-a atrativa ou repulsiva a entidades sobrenaturais (sua escolha)."},
+        {"id":"100039", "playbook":"Doutor", "level":"1", "nome":"Médico", "descricao":"Você pode Adulterar ossos, sangue e humores corporais para tratar ferimentos ou estabilizar moribundos, e Estudar enfermidades ou cadáveres. Todos os membros do seu bando (incluindo você) recebem +1d em rolagens de tratamento."},
+        {"id":"100040", "playbook":"Doutor", "level":"1", "nome":"Sabotador", "descricao":"Você consegue Detonar de maneira muito mais silenciosa, escondendo bem o dano de olhares casuais."},
+        {"id":"100041", "playbook":"Doutor", "level":"1", "nome":"Venenoso", "descricao":"Através de experimentos alquímicos ou exposição repetida, você se tornou imune a um veneno ou droga (escolha um do estoque da sua bandoleira). Você pode fazer um esforço extra para secretá-lo através da sua pele ou saliva, ou mesmo exalá-lo como um vapor."},
+
+        {"id":"100042", "playbook":"Cão de Caça", "level":"1", "nome":"Franco-atirador", "descricao":"Você pode usar esforço extra para realizar qualquer uma das seguintes proezas: fazer um ataque à distância em um alcance além do normal, ou disparar uma saraivada de tiros como fogo de supressão."},
+        {"id":"100043", "playbook":"Cão de Caça", "level":"1", "nome":"Concentrado", "descricao":"Você pode usar a sua armadura especial para resistir a uma consequência de surpresa, ou dano mental (confusão, medo, perder alguém de vista), ou para fazer esforço extra durante um combate à distância, perseguição ou rastreamento."},
+        {"id":"100044", "playbook":"Cão de Caça", "level":"2", "nome":"Caçador de Fantasmas", "descricao":"O seu animal de caça é imbuído de energia espiritual, recebendo potência para rastrear, seguir ou lutar contra alvos sobrenaturais. Ele também recebe uma habilidade arcana: forma fantasmagórica, elo mental, ou rápido como uma flecha. Você pode selecionar essa habilidade novamente para conceder uma habilidade arcana adicional ao seu animal de caça."},
+        {"id":"100045", "playbook":"Cão de Caça", "level":"1", "nome":"Batedor", "descricao":"Você recebe +1 efeito sempre que levanta informações para descobrir a localização de um alvo e +1d em rolagens para evitar detecção quando camuflado, ou escondido em uma posição preparada."},
+        {"id":"100046", "playbook":"Cão de Caça", "level":"1", "nome":"Sobrevivente", "descricao":"Seja através de terríveis experiências ou rituais ocultistas, você se tornou imune ao miasma venenoso das terras mortais e consegue se alimentar da fauna e flora estranhas que lá existem. Você também recebe +1 caixa de estresse."},
+        {"id":"100047", "playbook":"Cão de Caça", "level":"1", "nome":"Osso Duro de Roer", "descricao":"Você diminui as penalidades de dano em um nível (embora o nível 4 ainda seja fatal)."},
+        {"id":"100048", "playbook":"Cão de Caça", "level":"1", "nome":"Vingativo", "descricao":"Você recebe um novo gatilho de xp: Você conseguiu vingança contra alguém que o prejudicou ou a algum ente querido. O seu bando também marca xp se o ajudou na vingança."},
+
+        {"id":"100049", "playbook":"Aranha", "level":"1", "nome":"Previsão", "descricao":"Até duas vezes por golpe, você pode ajudar um companheiro sem sofrer estresse. Para fazer isso, descreva os preparativos que fez para lidar com essa situação."},
+        {"id":"100050", "playbook":"Aranha", "level":"1", "nome":"Calculista", "descricao":"O seu planejamento meticuloso permite que você ou um companheiro realize +1 atividade durante cada fase de folga."},
+        {"id":"100051", "playbook":"Aranha", "level":"1", "nome":"Bem Conectado", "descricao":"Você recebe +1 nível de resultado em rolagens realizadas para adquirir recursos ou reduzir atenção durante a folga."},
+        {"id":"100052", "playbook":"Aranha", "level":"1", "nome":"Vício Sob Controle", "descricao":"Ao satisfazer o seu vício, você pode ajustar o valor do resultado da rolagem em 1 ou 2 (para cima ou para baixo). Um aliado que o acompanhe pode fazer o mesmo."},
+        {"id":"100053", "playbook":"Aranha", "level":"1", "nome":"Contrato Espiritual", "descricao":"Ao escrever um contrato ou apertar as mãos para selar um acordo, tanto você quanto seu parceiro (sejam vocês humanos ou não) são marcados em juramento. Qualquer uma das partes que quebrar o contrato sofrerá um dano de nível 3: “Amaldiçoado”."},
+        {"id":"100054", "playbook":"Aranha", "level":"1", "nome":"Freguês da Prisão", "descricao":"Quando você é preso, considere que o seu Nível de Procurado é reduzido em 1 e a Categoria aumentada em 1. Você também ganha +1 de status com uma facção com a qual coopere atrás das grades, além de qualquer resultado obtido com a rolagem de prisão."},
+        {"id":"100055", "playbook":"Aranha", "level":"1", "nome":"Visionário", "descricao":"Você pode usar a sua armadura especial para proteger um companheiro ou para fazer esforço extra ao levantar informações ou progredir em um projeto de longo prazo."},
+        {"id":"100056", "playbook":"Aranha", "level":"1", "nome":"Tecendo a Teia", "descricao":"Você recebe +1d em rolagens de Socializar para levantar informações sobre o alvo de um golpe e +1d para a rolagem de abertura dessa operação."}
+
+    ],
+
+    "itens": [
+        {"playbook":"comum","nome":"Uma lâmina ou duas", "carga": 1},
+        {"playbook":"comum","nome":"Facas de arremesso", "carga": 1},
+        {"playbook":"comum","nome":"Uma pistola", "carga": 1},
+        {"playbook":"comum","nome":"Umas 2ª pistola", "carga": 1},
+        {"playbook":"comum","nome":"Uma arma grande", "carga": 1},
+        {"playbook":"comum","nome":"Uma arma incomum", "carga": 1},
+        {"playbook":"comum","nome":"Armadura", "carga": 2},
+        {"playbook":"comum","nome":"+Pesada", "carga": 3},
+        {"playbook":"comum","nome":"Ferram. de Arrombamento", "carga": 1},
+        {"playbook":"comum","nome":"Ferramentas de Escalada", "carga": 2},
+        {"playbook":"comum","nome":"Implementos Arcanos", "carga": 1},
+        {"playbook":"comum","nome":"Documentos", "carga": 1},
+        {"playbook":"comum","nome":"Suprimentos de Subterfúgio", "carga": 1},
+        {"playbook":"comum","nome":"Instrumentos de Demolição", "carga": 2},
+        {"playbook":"comum","nome":"Instrumentos de Adulteração", "carga": 1},
+        {"playbook":"comum","nome":"Lanterna", "carga": 1},
+
+        {"playbook":"Aranha","nome":"Identidade falsa superior", "carga": 1},
+        {"playbook":"Aranha","nome":"Garrafa de uísque superior", "carga": 1},
+        {"playbook":"Aranha","nome":"Plantas baixas", "carga": 1},
+        {"playbook":"Aranha","nome":"Frasco de essência do sono", "carga": 1},
+        {"playbook":"Aranha","nome":"Pistola de palma", "carga": 1},
+        {"playbook":"Aranha","nome":"Amuleto de prot. contra espíritos", "carga": 1},
+
+        {"playbook":"Cão de Caça", "nome":"Par de pistolas superiores", "carga": 1},
+        {"playbook":"Cão de Caça", "nome":"Rifle longo superior", "carga": 2},
+        {"playbook":"Cão de Caça", "nome":"Munição electroplasmática", "carga": 1},
+        {"playbook":"Cão de Caça", "nome":"Animal de caça treinado", "carga": 1},
+        {"playbook":"Cão de Caça", "nome":"Luneta", "carga": 1},
+        {"playbook":"Cão de Caça", "nome":"Amuleto de prot. contra espíritos ", "carga": 1},
+
+        {"playbook":"Doutor","nome":"Instr. superiores de adulteração", "carga": 1},
+        {"playbook":"Doutor","nome":"Instrumentos superiores de detonação", "carga": 2},
+        {"playbook":"Doutor","nome":"Zarabatana e dardos, seringas", "carga": 1},
+        {"playbook":"Doutor","nome":"Bandoleira (3 usos)", "carga": 1},
+        {"playbook":"Doutor","nome":"Bandoleira (3 usos)", "carga": 1},
+        {"playbook":"Doutor","nome":"Engenhocas", "carga": 3},
+
+        {"playbook":"Furtivo","nome":"Ferramentas superiores de arrombamento", "carga": 1},
+        {"playbook":"Furtivo","nome":"Manto das sombras superior", "carga": 1},
+        {"playbook":"Furtivo","nome":"Ferramentas leves de escalada", "carga": 1},
+        {"playbook":"Furtivo","nome":"Frasco de poção do silêncio", "carga": 1},
+        {"playbook":"Furtivo","nome":"Óculos de visão no escuro", "carga": 1},
+        {"playbook":"Furtivo","nome":"Amuleto de prot. contra espíritos", "carga": 1},
+
+        {"playbook":"Retalhador","nome":"Arma superior corpo a corpo", "carga": 1},
+        {"playbook":"Retalhador","nome":"Arma superior pesada", "carga": 2},
+        {"playbook":"Retalhador","nome":"Arma ou ferramenta assustadora", "carga": 1},
+        {"playbook":"Retalhador","nome":"Algemas e correntes", "carga": 1},
+        {"playbook":"Retalhador","nome":"Frasco de essência da ira", "carga": 1},
+        {"playbook":"Retalhador","nome":"Amuleto de prot. contra espíritos", "carga": 1},
+
+        {"playbook":"Suave","nome":"Roupas e joias superiores", "carga": 1},
+        {"playbook":"Suave","nome":"Kit de disfarces superior", "carga": 1},
+        {"playbook":"Suave","nome":"Dados viciados e cartas marcadas superiores", "carga": 1},
+        {"playbook":"Suave","nome":"Talco do transe", "carga": 1},
+        {"playbook":"Suave","nome":"Bengala-espada", "carga": 1},
+        {"playbook":"Suave","nome":"Amuleto de prot. contra espíritos", "carga": 1},
+
+        {"playbook":"Sussurro","nome":"Gancho elétrico superior", "carga": 2},
+        {"playbook":"Sussurro","nome":"Máscara espiritual superior", "carga": 1},
+        {"playbook":"Sussurro","nome":"Frascos de Electroplasma", "carga": 1},
+        {"playbook":"Sussurro","nome":"Jarras Espirituais (2)", "carga": 1},
+        {"playbook":"Sussurro","nome":"Chave Fantasma", "carga": 1},
+        {"playbook":"Sussurro","nome":"Amuleto de prot. contra demônios", "carga": 1}
+    ],
+
+    "contatos": [
+        {"playbook":"Aranha", "nome": "Salia", "descricao": "negociante de informações", "amigo": false, "rival": false},
+        {"playbook":"Aranha", "nome": "Augus", "descricao": "mestre arquiteto", "amigo": false, "rival": false},
+        {"playbook":"Aranha", "nome": "Jennah", "descricao": "camareira", "amigo": false, "rival": false},
+        {"playbook":"Aranha", "nome": "Riven", "descricao": "química", "amigo": false, "rival": false},
+        {"playbook":"Aranha", "nome": "Jeren", "descricao": "Casaca Azul arquivista", "amigo": false, "rival": false},
+
+        {"playbook":"Cão de Caça", "nome": "Steiner", "descricao": "assassino", "amigo": false, "rival": false},
+        {"playbook":"Cão de Caça", "nome": "Celene", "descricao": "sentinela", "amigo": false, "rival": false},
+        {"playbook":"Cão de Caça", "nome": "Melvir", "descricao": "médico", "amigo": false, "rival": false},
+        {"playbook":"Cão de Caça", "nome": "Veleris", "descricao": "espiã", "amigo": false, "rival": false},
+        {"playbook":"Cão de Caça", "nome": "Casta", "descricao": "caçadora de recompensas", "amigo": false, "rival": false},
+
+        {"playbook":"Doutor", "nome": "Stazia", "descricao": "apotecária", "amigo": false, "rival": false},
+        {"playbook":"Doutor", "nome": "Veldren", "descricao": "psiconauta", "amigo": false, "rival": false},
+        {"playbook":"Doutor", "nome": "Eckerd", "descricao": "ladrão de cadáveres", "amigo": false, "rival": false},
+        {"playbook":"Doutor", "nome": "Jul", "descricao": "traficante de sangue", "amigo": false, "rival": false},
+        {"playbook":"Doutor", "nome": "Malista", "descricao": "sacerdotisa", "amigo": false, "rival": false},
+
+        {"playbook":"Furtivo", "nome": "Telda", "descricao": "mendiga", "amigo": false, "rival": false},
+        {"playbook":"Furtivo", "nome": "Darmot", "descricao": "Casaca Azul", "amigo": false, "rival": false},
+        {"playbook":"Furtivo", "nome": "Frake", "descricao": "chaveiro", "amigo": false, "rival": false},
+        {"playbook":"Furtivo", "nome": "Roslyn Kellis", "descricao": "aristocrata", "amigo": false, "rival": false},
+        {"playbook":"Furtivo", "nome": "Petra", "descricao": "funcionária da prefeitura", "amigo": false, "rival": false},
+
+        {"playbook":"Retalhador", "nome": "Marlane", "descricao": "pugilista", "amigo": false, "rival": false},
+        {"playbook":"Retalhador", "nome": "Chael", "descricao": "bandido cruel", "amigo": false, "rival": false},
+        {"playbook":"Retalhador", "nome": "Mercy", "descricao": "assassina fria", "amigo": false, "rival": false},
+        {"playbook":"Retalhador", "nome": "Grace", "descricao": "assaltante", "amigo": false, "rival": false},
+        {"playbook":"Retalhador", "nome": "Sawtooth", "descricao": "médico", "amigo": false, "rival": false},
+
+        {"playbook":"Suave", "nome": "Bryl", "descricao": "traficante", "amigo": false, "rival": false},
+        {"playbook":"Suave", "nome": "Bazso Baz", "descricao": "líder de gangue", "amigo": false, "rival": false},
+        {"playbook":"Suave", "nome": "Klyra", "descricao": "dona de taverna", "amigo": false, "rival": false},
+        {"playbook":"Suave", "nome": "Nyryx", "descricao": "prostituto(a)", "amigo": false, "rival": false},
+        {"playbook":"Suave", "nome": "Harker", "descricao": "presidiário reincidente", "amigo": false, "rival": false},
+
+        {"playbook":"Sussurro", "nome": "Nyryx", "descricao": "fantasma possessor", "amigo": false, "rival": false},
+        {"playbook":"Sussurro", "nome": "Scurlock", "descricao": "vampiro", "amigo": false, "rival": false},
+        {"playbook":"Sussurro", "nome": "Nyryx", "descricao": "demônio", "amigo": false, "rival": false},
+        {"playbook":"Sussurro", "nome": "Nyryx", "descricao": "perita em bruxaria", "amigo": false, "rival": false},
+        {"playbook":"Sussurro", "nome": "Nyryx", "descricao": "traficante de espíritos", "amigo": false, "rival": false}
+    ],
+
+    "crew": {
+        "reputacoes": ["Ambicioso", "Violento", "Audacioso", "Honrado", "Profissional", "Astuto", "Sutil", "Estranho"],
+
+        "tipos": ["Assassinos", "Bravos", "Contrabandistas", "Culto", "Mascates","Sombras"],
+
+        "upgrades": [
+            {"nome": "Alojamentos", "descricao": "O covil inclui quartos e alojamentos para os membros do bando. Sem esse upgrade, cada PJ dorme em um lugar diferente e fica relativamente vulnerável."},
+            {"nome": "Cofre", "descricao": "O seu covil possui um cofre seguro, permitindo que o bando armazene até 8 moedas. Esse upgrade pode ser realizado novamente, aumentando essa capacidade para 16. O cofre inclui uma parte separada que pode ser usada como uma cela de detenção."},
+            {"nome": "Covil Seguro", "descricao": "O covil do seu bando é equipado com fechaduras, alarmes e armadilhas para repelir invasores. Esse upgrade pode ser realizado novamente, acrescentando proteções arcanas que funcionam contra espíritos. Você pode rolar a sua Categoria se essas defesas forem testadas – o resultado determina a eficácia das defesas em deter os intrusos."},
+            {"nome": "Esconderijo", "descricao": "O covil do seu bando tem uma localização secreta e disfarçada da vista de transeuntes. Caso o covil for descoberto, ele pode ser realocado para uma nova localização secreta e escondida se vocês usarem duas atividades de folga e pagarem uma quantidade de moedas igual à Categoria do bando."},
+            {"nome": "Cocheira", "nivel": 2, "descricao": "Você possui uma carruagem, animais de carga para puxá-la e um estábulo. Esse upgrade pode ser realizado novamente, resultando em uma carruagem reforçada contra ataques e montarias maiores e mais rápidas. Cavalos são muito raros em Doskvol – a maior parte das carruagens usa os grandes bodes akorosianos como animais de tração."},
+            {"nome": "Hangar náutico", "nivel": 2, "descricao": "Você possui um barco, uma doca em um canal e um pequeno hangar para armazenar equipamentos náuticos. Esse upgrade pode ser feito novamente, resultando em um barco reforçado contra ataques e capaz de suportar mais carga."},
+            {"nome": "Maestria", "descricao": "O seu bando tem acesso a treinamento de mestres. Os PJs podem aumentar os seus valores de ação até o nível 4 (eles são restritos ao nível 3 até obterem esse upgrade). A maestria custa quatro caixas de upgrade."},
+            {"nome": "Oficina", "descricao": "O seu covil possui uma oficina equipada com instrumentos para adulteração e alquimia, assim como uma pequena biblioteca de livros, documentos e mapas. Vocês podem usar isso para progredir em projetos de longo prazo sem deixar a segurança do covil."},
+            {"nome": "Parceiro", "descricao": "Um parceiro é uma gangue ou um único especialista PdM que trabalha para o bando. Para mais informações, veja a pág. 105 do livro."},
+            {"nome": "Qualidade", "descricao": "Cada upgrade aumenta o nível de qualidade de todos os itens dos PJs de um determinado tipo. Esse aumento vai além da Categoria do bando e dos itens superiores dos PJs. Esse upgrade pode ser aplicado a Documentos, Ferramentas (incluindo Ferramentas de Escalada e Ferramentas de Arrombamento), Implementos Arcanos, Suprimentos de Subterfúgio, Instrumentos (incluindo Instrumentos de Demolição e Instrumentos de Adulteração) e Armas. Então, se você for da Categoria 0, com o upgrade de Qualidade de Ferramentas (+1) e com ferramentas superiores de arrombamento (+1), conseguirá lidar com uma fechadura de Categoria II em pé de igualdade."},
+            {"nome": "Treinamento", "descricao": "Esse upgrade permite que os PJs recebam 2 xp (ao invés de 1) ao treinarem um marcador específico de xp durante a folga, permitindo que eles avancem mais rapidamente. Veja mais informações na seção de Desenvolvimento (pág. 55). Se o seu bando possui Treinamento de Esperteza, você marca 2 xp (ao invés de 1) no marcador de Esperteza ao realizar um Treino nesse atributo. Se o seu bando possui Treinamento de Cartilha, você marca 2 xp no marcador de cartilha após o treino apropriado. Treinamento de mestres. Os PJs podem aumentar seus valores de ação mais rapidamente."}
+        ],
+
+        "habilidades": [
+            {"nome": "Veterano", "tipo":"", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Brigar, Caçar ou Esgueirar (para um valor máximo de 3)."},
+            {"nome": "Mortal", "tipo":"Assassinos", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Brigar, Caçar ou Esgueirar (para um valor máximo de 3)."},
+            {"nome": "Véu do Corvo", "tipo":"Assassinos", "nivel":1,  "descricao": "Devido a duras experiências ou rituais arcanos, os corvos busca-morte não conseguem notar as atividades do seu bando. O seu bando não recebe atenção extra quando ocorre um assassinato durante um golpe."},
+            {"nome": "Extinguir a Centelha", "tipo":"Assassinos", "nivel":1,  "descricao": "Devido a duras experiências ou rituais arcanos, o seu bando conhece um método arcano para destruir o espírito de um alvo vivo no momento de sua morte. Você pode sofrer 3 de estresse para canalizar energia electroplasmática pelo campo fantasmagórico, desintegrando o corpo e o espírito em uma chuva de faíscas cintilantes."},
+            {"nome": "Sem Rastros", "tipo":"Assassinos", "nivel":1,  "descricao": "O seu bando ainda recebe metade do valor de moral do alvo (arredondado para cima) quando executa uma operação em segredo ou faz com que pareça um acidente. Ele também recebe +1 moral quando termina a folga com zero de atenção."},
+            {"nome": "Patrono", "tipo":"Assassinos", "nivel":1, "descricao": "Seu bando gasta apenas metade das moedas para subir de Categoria. Quem é o seu patrono? Por que ele ajuda vocês?"},
+            {"nome": "Predadores", "tipo":"Assassinos", "nivel":1, "descricao": "Você recebe +1d na rolagem de abertura quando usa um plano de enganação ou furtividade para cometer um assassinato."},
+            {"nome": "Serpentes", "tipo":"Assassinos", "nivel":1, "descricao": "Você recebe +1 nível de resultado em rolagens para adquirir ou criar venenos. Ao empregar um determinado veneno, você se prepara para se imunizar de seus efeitos."},
+
+            {"nome": "Perigosos", "tipo":"Bravos", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Brigar, Caçar ou Detonar (para um valor máximo de 3)."},
+            {"nome": "Irmãos de Sangue", "tipo":"Bravos", "nivel":1, "descricao": "Os seus parceiros recebem +1d em rolagens de trabalho em equipe (ações de grupo e facilitar) sempre que lutam ao lado de algum PJ. Todos os seus parceiros recebem o tipo Capangas gratuitamente (se já possuam esse tipo, adicione outro)."},
+            {"nome": "Chutadores de Portas", "tipo":"Bravos", "nivel":1, "descricao": "Você recebe +1d na rolagem de abertura quando usa um plano de agressão."},
+            {"nome": "Diabos", "tipo":"Bravos", "nivel":1, "descricao": "O medo e o respeito andam lado a lado. Vocês tratam cada nível de procurado como território."},
+            {"nome": "Forjados nas Chamas", "tipo":"Bravos", "nivel":1, "descricao": "Cada PJ foi endurecido pelas experiências cruéis enfrentadas na sua carreira. Vocês recebem +1d em rolagens de resistência."},
+            {"nome": "Patrono", "tipo":"Bravos", "nivel":1, "descricao": "Seu bando gasta apenas metade das moedas para subir de Categoria. Quem é o seu patrono? Por que ele ajuda vocês?"},
+            {"nome": "Cães de Guerra", "tipo":"Bravos", "nivel":1, "descricao": "O bando não sofre a perda de controle por estar em guerra com outra facção (-3 status) e ainda podem realizar duas atividades de folga ao invés de apenas uma."},
+
+            {"nome": "Parte da Família", "tipo":"Contrabandista", "nivel":1, "descricao": "Um dos seus veículos é considerado um parceiro (use os méritos e defeitos de veículos ao lado). A sua qualidade é igual à Categoria do bando +1."},
+            {"nome": "Hora Extra", "tipo":"Contrabandista", "nivel":1, "descricao": "Durante cada fase de folga, um dos seus parceiros pode realizar uma das seguintes atividades para o bando: adquirir um recurso, reduzir atenção ou trabalhar em algum projeto de longo prazo."},
+            {"nome": "Passagem Fantasma", "tipo":"Contrabandista", "nivel":1, "descricao": "Seja através de terríveis experiências ou rituais ocultistas, todos os membros do seu bando são imunes à possessão de fantasmas. Eles também são capazes de “transportar” um fantasma como passageiro dentro de seu corpo."},
+            {"nome": "De Passagem", "tipo":"Contrabandista", "nivel":1, "descricao": "O bando recebe -1 atenção durante a folga. Enquanto a sua atenção for igual ou menor a 4, membros recebem +1d para enganar outros se passando por cidadãos simples."},
+            {"nome": "Influência", "tipo":"Contrabandista", "nivel":1, "descricao": "O seu bando fornece produtos ilícitos para outras facções, que se beneficiam com seu sucesso. Cada vez que receberem moral, aumente em um a quantidade recebida."},
+            {"nome": "Piratas", "tipo":"Contrabandista", "nivel":1, "descricao": "Quando o bando entra em conflito a bordo de veículos, vocês ganham +1 de efeito em rolagens envolvendo o dano e velocidade do veículo. O seu veículo também recebe armadura."},
+            {"nome": "Renegados", "tipo":"Contrabandista", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Brigar, Esgueirar ou Manejar (para um valor máximo de 3)."},
+
+            {"nome": "Escolhidos", "tipo":"Culto", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Estudar, Convencer ou Sintonizar (para um valor máximo de 3)."},
+            {"nome": "Ungidos", "tipo":"Culto", "nivel":1, "descricao": "Você recebe +1d em rolagens de resistência contra ameaças sobrenaturais, e +1d em rolagens de recuperação enquanto possuir algum dano de origem sobrenatural."},
+            {"nome": "Unidos Através da Escuridão", "tipo":"Culto", "nivel":1, "descricao": "Você pode executar manobras de trabalho em equipe com qualquer membro do culto, independentemente da distância que os separa. Você também pode sofrer 1 de estresse para sussurrar uma mensagem que será ouvida por todos os cultistas."},
+            {"nome": "Devoção", "tipo":"Culto", "nivel":1, "descricao": "Cada PJ ganha um novo vício: Adoração. Você não corre o risco de passar da conta se trouxer um sacrifício adequado para satisfazer esse vício. Após o sacrifício, a sua divindade oferece uma ajuda em uma rolagem de ação realizada por você (até você satisfazer seu vício novamente)."},
+            {"nome": "Glória Encarnada", "tipo":"Culto", "nivel":1, "descricao": "A sua divindade se manifesta ocasionalmente no mundo físico. Isso pode parecer uma grande dádiva, mas um deus tem prioridades e valores muito diferentes dos simples mortais. Considere isso um aviso."},
+            {"nome": "Selado em Sangue", "tipo":"Culto", "nivel":1, "descricao": "Cada sacrifício humano diminui em 3 o custo de estresse de rituais executados pelos PJs."},
+            {"nome": "Fanatismo", "tipo":"Culto", "nivel":1, "descricao": "Os seus parceiros abandonaram a sua razão para devotarem-se completamente ao culto. Eles executarão qualquer serviço requisitado, independentemente do risco ou estranheza. Eles também recebem +1d em rolagens sempre que agirem contra inimigos da fé."},
+
+            {"nome": "Língua Afiada", "tipo":"Mascates", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Comandar, Convencer ou Socializar (para um valor máximo de 3)."},
+            {"nome": "Consórcio", "tipo":"Mascates", "nivel":1, "descricao": "Às vezes, bons amigos valem mais que territórios. Cada status de facção +3 possuído pelo bando (máx. de 3) conta como um território sob seu controle."},
+            {"nome": "Alta Qualidade", "tipo":"Mascates", "nivel":1, "descricao": "A sua mercadoria é excelente. A qualidade do seu produto é igual à sua Categoria +2. Quando você lida com outro bando ou facção, o mestre indica quais deles são viciados no seu produto (apenas um, alguns deles, vários ou todos)."},
+            {"nome": "Mercado Fantasma", "tipo":"Mascates", "nivel":1, "descricao": "Seja através de terríveis experiências ou rituais ocultistas, você descobriu uma maneira de preparar o seu produto para ser vendido para fantasmas e/ou demônios. Eles não pagam em moedas – com o que eles pagam?"},
+            {"nome": "Alta Sociedade", "tipo":"Mascates", "nivel":1, "descricao": "Você conhece as pessoas certas. O bando recebe -1 atenção durante a folga e +1d para levantar informações sobre a elite da cidade."},
+            {"nome": "Viciados", "tipo":"Mascates", "nivel":1, "descricao": "Os membros das suas gangues usam o seu produto. Acrescente o defeito feroz, indomável ou instável para conceder a uma gangue +1 de qualidade."},
+            {"nome": "Patrono", "tipo":"Mascates", "nivel":1, "descricao": "O seu bando gasta só metade da quantidade de moedas para subir de Categoria. Quem é o seu patrono? Por que ele ajuda o seu bando?"},
+
+            {"nome": "Cem Anos de Perdão", "tipo":"Sombras", "nivel":1, "descricao": "Cada PJ pode adicionar +1 ao seu valor de ação de Adulterar, Esgueirar ou Manejar (para um valor máximo de 3)."},
+            {"nome": "Ecos Fantasmagóricos", "tipo":"Sombras", "nivel":1, "descricao": "Seja através de terríveis experiências ou rituais ocultistas, todos os membros do seu bando conseguem ver e interagir com objetos, estruturas e ruas fantasmagóricas que existem no eco de Doskvol dentro do campo fantasmagórico."},
+            {"nome": "Acumuladores", "tipo":"Sombras", "nivel":1, "descricao": "O covil do bando é uma verdadeira bagunça de objetos roubados. Você recebe +1d em rolagens para adquirir um recurso."},
+            {"nome": "Patrono", "tipo":"Sombras", "nivel":1, "descricao": "O seu bando gasta só metade da quantidade de moedas para subir de Categoria. Quem é o seu patrono? Por que ele ajuda o seu bando?"},
+            {"nome": "Gatunos", "tipo":"Sombras", "nivel":1, "descricao": "Você recebe +1d na rolagem de abertura ao executar uma infiltração clandestina."},
+            {"nome": "Escorregadios", "tipo":"Sombras", "nivel":1, "descricao": "Quando determinar as desavenças, role dois dados e escolha um dos resultados. Receba também +1d para reduzir a atenção do bando."},
+            {"nome": "Sincronizados", "tipo":"Sombras", "nivel":1, "descricao": "Quando você faz uma ação coletiva, cada resultado 6 obtido nas rolagens individuais conta como um sucesso crítico."}
+
+        ]
+
+        
+
+    }
+
+
+}
