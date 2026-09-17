@@ -47,6 +47,7 @@
             "convicção": ["comandar", "convencer", "sintonizar","socializar"],
             "destreza"  : ["brigar", "detonar", "esgueirar", "sutileza"],
             "esperteza" : ["adulterar", "caçar", "estudar", "sondar"]
+
         };
 
         this.bonds = [];
