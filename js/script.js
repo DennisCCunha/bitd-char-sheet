@@ -203,6 +203,7 @@ class CharacterSheet {
         this.character.playbook = e.target.value;
         this.loadplaybookMoves();
         this.loadplaybookContacts();
+        this.loadItens();
         this.updateCharacterFromDOM();
         this.save();
     }
@@ -239,7 +240,7 @@ class CharacterSheet {
         document.querySelectorAll('input, select, textarea').forEach((el) => {
             if (!el.id) return;
             if (el.id === 'restoreCodeInput' || el.id === 'codeModalText') return;
-            if (el.type === 'checkbox') {
+            if (el.type === 'checkbox' || el.type === 'radio') {
                 inputsState[el.id] = el.checked;
             } else {
                 inputsState[el.id] = el.value;
@@ -272,13 +273,15 @@ class CharacterSheet {
         if (character.playbook) {
             setVal('playbookSelector', character.playbook);
             this.loadplaybookMoves();
+            this.loadplaybookContacts();
+            this.loadItens();
         }
 
         if (character.inputs) {
             for (const [id, value] of Object.entries(character.inputs)) {
                 const el = document.getElementById(id);
                 if (!el) continue;
-                if (el.type === 'checkbox') {
+                if (el.type === 'checkbox' || el.type === 'radio') {
                     el.checked = Boolean(value);
                 } else {
                     el.value = value ?? '';
@@ -315,6 +318,8 @@ class CharacterSheet {
         this.character = new Character(); // reset model first
         this.clearInputs();
         this.loadplaybookMoves();
+        this.loadItens();
+        this.loadplaybookContacts();
         const pageTitle = document.getElementById('pageTitle');
         if (pageTitle) {
             pageTitle.textContent = 'Blades in the Dark - Ficha de personagem';
@@ -363,7 +368,7 @@ class CharacterSheet {
             }
 
             const span = document.createElement('span');
-            span.classList.add('header-label');
+            span.classList.add('movement-header-label');
             span.textContent = move.nome;
 
             const p = document.createElement('p');
@@ -383,37 +388,104 @@ class CharacterSheet {
         contactsContainer.innerHTML = '';
         
         let contatos = null;
+        let labelText = '';
 
         this.ruleset.playbook.forEach((playbook) => {
             if (playbook.nome === this.character.playbook) {
+                labelText = playbook['contatos-label'];
                 contatos = playbook.contatos;
             }
         });
+
+        const label = document.createElement('span');
+        label.textContent = labelText;
+        label.classList.add('contact-label');
+        contactsContainer.appendChild(label);
 
         contatos.forEach((amigo, index) => {
             const box = document.createElement('div');
             box.classList.add('contact-box');
 
+            const radioGroup = document.createElement('div');
+            radioGroup.classList.add('radio-group');
+
+
+            const relationshipGroup = `contact-${index}`;
+
             const ally = document.createElement('input');
             ally.type = 'radio';
-            ally.name = 'ally';
-            ally.value = index;
+            ally.id = `contact-${index}-ally`;
+            ally.name = relationshipGroup;
+            ally.className = 'triangle-radio ally';
+            ally.value = 'ally';
+            ally.checked = Boolean(this.character.inputs?.[ally.id]);
 
             const rival = document.createElement('input');
             rival.type = 'radio';
-            rival.name = 'rival';
-            rival.value = index;
+            rival.id = `contact-${index}-rival`;
+            rival.name = relationshipGroup;
+            rival.className = 'triangle-radio rival';
+            rival.value = 'rival';
+            rival.checked = Boolean(this.character.inputs?.[rival.id]);
 
             const name = document.createElement('div');
             name.classList.add('contact-name');
             name.textContent = amigo;
 
 
-            box.appendChild(ally);
-            box.appendChild(rival);
+            radioGroup.appendChild(ally);
+            radioGroup.appendChild(rival);
+            box.appendChild(radioGroup);
             box.appendChild(name);
             contactsContainer.appendChild(box);
         });
+    }
+
+    loadItens() {
+        const itensContainer = document.getElementById('itensContainer');
+        if (!itensContainer) return;
+        itensContainer.innerHTML = '';
+
+        const label = document.createElement('span');
+        label.textContent = "Itens";
+        label.classList.add('contact-label');
+        itensContainer.appendChild(label);
+
+        const container = document.createElement('div');
+        container.classList.add('itens-container');
+        itensContainer.appendChild(container);
+
+
+        const itens = this.ruleset.itens.filter( item => item.playbook === this.character.playbook || item.playbook === "Comum" );
+        itens.forEach(item => {
+
+            const itemBox = document.createElement('div');
+            itemBox.classList.add('item-box');
+
+            const itemName = document.createElement('div');
+            itemName.classList.add('item-name');
+            itemName.textContent = item.nome;
+
+            const itemLoadBox = document.createElement('div');
+            itemLoadBox.classList.add('item-load-box');
+
+            for (let index = 1; index <= item.carga; index++) {
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                const inputId = item.carga > 1 ? `item_${item.id}_${index}` : `item_${item.id}`;
+                input.id = inputId;
+                input.className = 'playbook';
+                if (this.character.inputs && this.character.inputs[inputId]) {
+                    input.checked = Boolean(this.character.inputs[inputId]);
+                }
+                itemLoadBox.appendChild(input);
+            }
+
+            itemBox.appendChild(itemLoadBox);
+            itemBox.appendChild(itemName);
+            container.appendChild(itemBox);
+        });
+
     }
 
     actionContainerRender() {

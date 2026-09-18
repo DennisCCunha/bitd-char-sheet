@@ -12,6 +12,10 @@
     --light: #c7c8ca;
     --muted: #dbdddf;
     --white: #ffffff;
+
+    --danger: #860000;
+    --favored: #080075;
+
     --font-family: 'Cactus Classical Serif', serif;
 }
 
@@ -431,12 +435,12 @@ input:focus + label {
             justify-content: flex-start;
             align-items: center;
             gap: .5rem;
-            
-            .header-label{
+            background-color: var(--focus);
+
+            .movement-header-label{
                 font-weight: 700;
-                color: var(--white);
-                width: 100%;
-                margin-left: auto;
+                color: var(--black);
+
             }
         }
 
@@ -451,7 +455,6 @@ input:focus + label {
     }
     
 }
-
 
 .section-abilities-actions{
     width: 100%;
@@ -486,11 +489,123 @@ input:focus + label {
 }
 
 
+.contact-box{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.3rem;
+}
+.contact-label{
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: .5rem;
+    width: 100%;
+    padding-left: 1.5rem;
+    box-sizing: border-box;
+    background-color: var(--focus);
+}
+.radio-group{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 1rem;
+    gap: .5rem;
+}
 
 
 
 
 
+.triangle-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;  
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 1.2rem;
+    height: 1.2rem;
+    
+    background: var(--focus);
+
+    /* clip-path: polygon(
+        50% 0,
+        100% 100%,
+        0 100%
+    ); */
+
+    clip-path: polygon(
+        /* Outer Triangle points */
+        50% 0%, 100% 100%, 0% 100%, 
+        
+        /* Bridge back to start */
+        50% 0%, 
+        
+        /* Inner Triangle points (drawn in reverse direction) */
+        50% 10px, 
+        10px calc(100% - 5px), 
+        calc(100% - 10px) calc(100% - 5px), 
+        50% 10px
+    );
+
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    &:checked {
+        background: var(--black);
+    }
+
+}
+
+.ally{
+    &:checked {
+        background: var(--favored);
+    }
+}
+
+.rival{
+    transform: rotate(180deg);
+    &:checked {
+        background: var(--danger);
+    }
+}
+
+
+.item-box{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    padding: 0.3rem;
+}
+
+.itens-container{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.item-name{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.item-load-box{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+
+
+.contact-name{
+    font-weight: 600;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
 
 .action-label{
     display: flex;
