@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cactus+Classical+Serif&display=swap');
 
 @import './reset.css';
-@import './banner.css';
+@import '../banner/banner.css';
 
 
 
@@ -276,6 +276,7 @@ input:focus + label {
     justify-content: space-between;
     box-sizing: border-box;
     gap: .5rem;
+    background-color: var(--muted);
 
     & > * {
         transform: translateY(1px);

@@ -3,6 +3,7 @@ import ruleset from "../data/blades.json" with { type: "json" };
 import SaveAndLoad from './saveAndLoad.js';
 import Character from './character.js';
 import Modal from './modal.js';
+import Banner from '../banner/banner.js';
 
 
 // Maps each attribute's element IDs to its Character model property key.
@@ -501,56 +502,20 @@ class CharacterSheet {
     // ─── Banner rendering ───────────────────────────────────────────────────────
 
     stressBanners(){
-        return this.genericBanners('stressBannerContainer', 'stress',  'stress-banner', 7);
+        return Banner.renderGroup('stressBannerContainer', 'stress', 'stress-banner', 7);
     }
 
     traumaBanners(){
-        return this.genericBanners('traumaBannerContainer', 'trauma', 'trauma-banner', 3);
+        return Banner.renderGroup('traumaBannerContainer', 'trauma', 'trauma-banner', 3);
     }
     
     playbookBanners(){
-        return this.genericBanners('playbookContainer', 'playbook', 'playbook-banner', 8);
+        return Banner.renderGroup('playbookContainer', 'playbook', 'playbook-banner', 8);
     }
 
     // ─── Ability banners must run 3 times Wittys - Guts - Conviction
     abilityBanners(abilityContainer, abilityId){
-        return this.genericBanners(abilityContainer, abilityId, 'ability-banner', 5);
-    }
-
-    genericBanners(container, bannerid, className, count){
-        const containerEl = typeof container === 'string' ? document.getElementById(container) : container;
-        if (!containerEl) return;
-        for (let index = 0; index <= count; index++) {
-            const banner = this.#renderBanner(`${bannerid}_${index+1}`, className);
-            containerEl.appendChild(banner);
-        }
-    }
-    
-    #renderBanner(id, className) {
-        const banner = document.createElement('label');
-        banner.id = id;
-        banner.htmlFor = `cb_${id}`;
-        
-        let label = document.createElement('label');
-        label.className = 'banner ' + className;
-        label.htmlFor = `cb_${id}`;
-        
-        let checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.id = `cb_${id}`;
-        label.appendChild(checkbox);
-
-        let borderWrapper = document.createElement('div');
-        borderWrapper.className = 'border-wrapper';
-
-        let checkmark = document.createElement('span');
-        checkmark.className = 'checkmark';
-
-        borderWrapper.appendChild(checkmark);
-        label.appendChild(borderWrapper);
-        banner.appendChild(label);
-
-        return banner;
+        return Banner.renderGroup(abilityContainer, abilityId, 'ability-banner', 5);
     }
 
     #renderActionContainer(key,atributo) {

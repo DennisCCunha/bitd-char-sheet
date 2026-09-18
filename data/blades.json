@@ -362,7 +362,7 @@
             {"tipo":"Sombras", "nome":"Receptador Leal", "efeito":"Você recebe +2 moedas na recompensa de golpes que envolvam roubos ou assaltos. Para repassar mercadorias roubadas, é preciso atenção a detalhes e ótimos contatos."},
             {"tipo":"Sombras", "nome":"Sala de Interrogação", "efeito":"Você recebe +1d para Comandar e Convencer dentro dessa área. É um trabalho terrível, mas alguém tem que fazê-lo."},
             {"tipo":"Sombras", "nome":"Taverna", "efeito":"Você recebe +1d para Convencer e Socializar dentro dessa área. Algumas bebidas e uma conversa amigável podem abrir muitas portas."},
-            {"tipo":"Sombras", "nome":"Venda de Drogas", "efeito":"A qualquer momento durante a folga, role tantos dados quanto sua Categoria. O bando recebe uma quantidade de moeda igual ao maior resultado dos dados, menos o valor da sua atenção atual. Qual é a droga vendida?"},
+            {"tipo":"Sombras", "nome":"Venda de Drogas", "efeito":"A qualquer momento durante a folga, role tantos dados quanto sua Categoria. O bando recebe uma quantidade de moeda igual ao maior resultado dos dados, menos o valor da sua atenção atual. Qual é a droga vendida?"}
 
         ],
 
