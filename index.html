@@ -13,6 +13,17 @@
       if ('serviceWorker' in navigator)
         navigator.serviceWorker.register('./service-worker.js');
     </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TCJEV9859Z');
+    </script>
+
+
     <script type="module" src="./js/script.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
   </head>
