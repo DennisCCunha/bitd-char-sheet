@@ -5,8 +5,81 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heist</title>
     <link rel="stylesheet" href="css/style.css">
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-TCJEV9859Z');
+    </script>
+    <script type="module" src="./js/layout.js" defer></script>
+    <script type="module" src="./js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
+    <script type="module" src="./js/heist.js" defer></script>
+
 </head>
 <body>
+    <nav id="site-nav" class="floating-nav">
+    </nav>
+    <main>
+        <article id="">
+            <section> 
+                <div>
+                    <label for="heist-name">Golpe</label>
+                    <input type="text" id="heist-name" name="heist-name">
+                </div>
+                <div>
+                    <label for="heist-location">Alvo</label>
+                    <input type="text" id="heist-location" name="heist-location">
+                </div>
+                <div>
+                    <label for="heist-date">Situação</label>
+                    <input type="text" id="heist-date" name="heist-date">
+                </div>
+                <div>
+                    <label for="heist-reward">Ponto de Entrada</label>
+                    <input type="text" id="heist-reward" name="heist-reward">
+                </div>
+                
 
+
+
+
+            </section>
+            <section>
+                <div>
+                    <span>Interação com Outras Facções</span>
+                    <div id="heist-faction-interaction"></div>
+                </div>
+            </section>
+        </article>
+        <article>
+            <section>
+                <div>
+                    <label for="heist-notes">Notas</label>
+                    <quill-editor id="heist-notes" name="heist-notes"></quill-editor>
+                </div>
+            </section>
+        </article>
+        <article>
+            <section>
+                <div>
+                    <span>Recompensas: </span>
+                    <label for="heist-moedas">Moedas</label>
+                    <input type="number" id="heist-moedas" name="heist-moedas">
+                    <label for="heist-moral">Moral</label>
+                    <input type="number" id="heist-moral" name="heist-moral">
+                </div>
+                <div>   
+                    <label for="heist-atencao">Atenção</label>
+                    <input type="number" id="heist-atencao" name="heist-atencao">
+                </div>
+            </section>
+        </article>
+    </main>
+    <footer id="site-footer">
+    </footer>
 </body>
 </html>
