@@ -98,6 +98,10 @@ input::placeholder {
 .menu .button.good-clock .text::before {
     color: var(--color-blue);
 }
+.menu .button.clock-six .text::before,
+.menu .button.clock-eight .text::before {
+    color: var(--color-light);
+}
 .menu .help .text {
     color: var(--color-light);
 }
