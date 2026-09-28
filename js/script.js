@@ -6,15 +6,13 @@ import Modal from './modal.js';
 import Banner from '../banner/banner.js';
 
 
-// Maps each attribute's element IDs to its Character model property key.
-// Used to drive events, modifier updates, and strikethrough logic from a single source of truth.
-
-
 class CharacterSheet {
 
     constructor() {
         document.addEventListener('DOMContentLoaded', () => {
             this.#init();
+            this.SaveAndLoad = SaveAndLoad;
+            this.Character = new Character();
         });
     }
 
@@ -27,8 +25,24 @@ class CharacterSheet {
 
         this.#registerModals();
         this.#registerEvents();
-    
+        this.#saveAndLoadButtons();
         this.#startup();
+    }
+
+    #saveAndLoadButtons() {
+        const nav = document.getElementById('site-nav');
+        const container = document.createElement('div');
+        container.className = 'save_buttons';
+        container.innerHTML = `
+          <button id="btnGerarCodigo">Salvar ficha</button>
+          <button id="btnRestaurar">Restaurar ficha</button>
+          <button id="btnLimpar">Limpar ficha</button>
+        `;
+        nav.appendChild(container);
+
+        document.getElementById('btnGerarCodigo')?.addEventListener('click', () => this.#openCodeModal());
+        document.getElementById('btnRestaurar')?.addEventListener('click', () => this.#openRestoreModal());
+        document.getElementById('btnLimpar')?.addEventListener('click', () => this.modal.open('clearModal'));
     }
 
     /** Ensures every input and XP circle has a stable ID for save/load. */
@@ -42,12 +56,12 @@ class CharacterSheet {
     #startup() {
         this.stressBanners();
         this.traumaBanners();
+        this.playbookBanners();
         this.actionContainerRender();
         this.playbookSelection();
         this.#assignMissingIds();
         this.load();
         this.#updateName();
-
         console.log('Ficha iniciada com sucesso.');
     }
 
@@ -79,7 +93,7 @@ class CharacterSheet {
         this.#createCodeModal();
         this.#createRestoreModal();
         this.#createClearModal();
-        this.#createMovementModal();
+        //this.#createMovementModal();
     }
 
     #createCodeModal() {
@@ -132,26 +146,26 @@ class CharacterSheet {
         });
     }
 
-    #createMovementModal() {
-        const body = document.createElement('div');
-        body.innerHTML = `
-            <p>Selecione os movimentos para o seu personagem.</p>
-            <select id="movementClassSelect">
-                <option value="">Selecione a classe</option>
-            </select>
-            <section id="movementModalContainer" class="movement-available"></section>
-        `;
-        this.modal.create({
-            id: 'movementModal',
-            title: 'Movimentos',
-            body,
-            closable: false,
-            buttons: [
-                { label: 'Confirmar' },
-                { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
-            ],
-        });
-    }
+    // #createMovementModal() {
+    //     const body = document.createElement('div');
+    //     body.innerHTML = `
+    //         <p>Selecione os movimentos para o seu personagem.</p>
+    //         <select id="movementClassSelect">
+    //             <option value="">Selecione a classe</option>
+    //         </select>
+    //         <section id="movementModalContainer" class="movement-available"></section>
+    //     `;
+    //     this.modal.create({
+    //         id: 'movementModal',
+    //         title: 'Movimentos',
+    //         body,
+    //         closable: false,
+    //         buttons: [
+    //             { label: 'Confirmar' },
+    //             { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
+    //         ],
+    //     });
+    // }
 
     #openCodeModal() {
         this.updateCharacterFromDOM();
@@ -187,6 +201,8 @@ class CharacterSheet {
         }
     }
 
+    // ─── Name Handling ─────────────────────────────────────────────────────────
+
     #updateName(){
         const inputNome = document.getElementById('input-nome');
         if (inputNome) {
@@ -212,10 +228,10 @@ class CharacterSheet {
 
     // ─── Persistence ─────────────────────────────────────────────────────────
 
-    save() { SaveAndLoad.autoSave(this.character); }
+    save() { SaveAndLoad.autoSave(Character, this.character); }
 
     load() {
-        const saved = SaveAndLoad.autoLoad();
+        const saved = SaveAndLoad.autoLoad(Character);
         if (saved) {
             this.character = saved;
             this.populateDOM(this.character);
@@ -445,19 +461,31 @@ class CharacterSheet {
     loadItens() {
         const itensContainer = document.getElementById('itensContainer');
         if (!itensContainer) return;
-        itensContainer.innerHTML = '';
+
+        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
+        const playbookItens = this.ruleset.itens.filter(item => item.playbook === this.character.playbook);
+
+        itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + this.character.playbook));
+        itensContainer.appendChild(this.renderItensBlock(commonItens, 'Itens Comuns'));
+    }
+
+    renderItensBlock(itens, labelText){
+        const itemgroup = document.createElement('div');
+        itemgroup.classList.add('itens-group');
+
+        const labelBox = document.createElement('div');
+        labelBox.classList.add('label-box');
+        itemgroup.appendChild(labelBox);
 
         const label = document.createElement('span');
-        label.textContent = "Itens";
-        label.classList.add('contact-label');
-        itensContainer.appendChild(label);
+        label.textContent = labelText;
+        // label.classList.add('contact-label');
+        labelBox.appendChild(label);
 
         const container = document.createElement('div');
         container.classList.add('itens-container');
-        itensContainer.appendChild(container);
+        itemgroup.appendChild(container);
 
-
-        const itens = this.ruleset.itens.filter( item => item.playbook === this.character.playbook || item.playbook === "Comum" );
         itens.forEach(item => {
 
             const itemBox = document.createElement('div');
@@ -487,6 +515,8 @@ class CharacterSheet {
             container.appendChild(itemBox);
         });
 
+
+        return itemgroup;
     }
 
     actionContainerRender() {
@@ -590,7 +620,6 @@ class CharacterSheet {
         }
         return actionList;
     }
-
 }
 
 function devIcon() {
@@ -604,5 +633,4 @@ function devIcon() {
 }
 
 devIcon();
-
 const sheet = new CharacterSheet();

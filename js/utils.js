@@ -1,5 +1,9 @@
 export default class Utils {
-// Canonicalização: remove acentos e normaliza para lower-case
+    /**
+     * Canonicaliza uma string: remove acentos e normaliza para lower-case.
+     * @param {string} text - Texto a ser canonicalizado.
+     * @returns {string} - Texto canonicalizado.
+     */
     static canonical(text) {
         return (text || '')
             .toString()
@@ -9,16 +13,33 @@ export default class Utils {
             .toLowerCase();
     }
 
+    /**
+     * Capitaliza a primeira letra de uma string e coloca o restante em minúsculas.
+     * @param {string} s - String a ser capitalizada.
+     * @returns {string} - String capitalizada.
+     */
     static capitalize(s) {
     if (!s) return s;
         return s[0].toUpperCase() + s.slice(1).toLowerCase();
     }
 
+    /**
+     * Filtra um objeto com base em um termo de pesquisa.
+     * @param {any} obj - Objeto a ser filtrado.
+     * @param {string} search - Termo de pesquisa.
+     * @returns {boolean} - Retorna true se o termo for encontrado, caso contrário false.
+     */
     static searchFilter(obj, search) {
         search = Utils.canonical(search);
         return Utils.walk(obj, search);
     }
 
+    /**
+     * Percorre recursivamente strings, arrays e objetos para verificar se contêm o termo pesquisado.
+     * @param {any} obj - Objeto a ser percorrido.
+     * @param {string} search - Termo de pesquisa.
+     * @returns {boolean} - Retorna true se o termo for encontrado, caso contrário false.
+     */
     static walk(obj, search) {
         if (typeof obj === 'string') {
             return Utils.canonical(obj).includes(search);
@@ -29,7 +50,15 @@ export default class Utils {
         }
         return false;
     }
-
+    
+    /**
+     * Cria um combobox customizado.
+     * @param {string} comboId - ID do combobox.
+     * @param {Array} optionsList - Lista de opções.
+     * @param {Array} selectedOptions - Opções selecionadas.
+     * @param {string} placeholder - Texto do placeholder.
+     * @returns {HTMLElement} - Elemento do combobox.
+     */
     static combobox(comboId, optionsList, selectedOptions = [], placeholder = "Select options...") {
         const comboBoxWrapper = document.createElement('div');
         comboBoxWrapper.classList.add('combobox-wrapper');

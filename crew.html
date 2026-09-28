@@ -1,49 +1,104 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crew</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title id="pageTitle">Blades in the Dark - Ficha de Bando </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="./css/style.css" />    
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script type="module" src="./js/layout.js" defer></script>
+    <script type="module" src="./js/crew.js?v=3" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
+    <script>
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('./js/service-worker.js');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TCJEV9859Z');
+    </script>
 </head>
 <body>
-    <nav>
+    <nav id="site-nav" class="floating-nav"></nav>
 
-    </nav>
-    <main>
+    <main id="main">
+
+        <article id="crew-article">
             <section class="crew-information-section">
-                <div id="crew-name-container">
-                    <label class="contact-label">Nome</label>
-                    <input type="text" name="crew-name" class="contact-input">
+                <div id="crew-nome" class="input-field">
+                    <label for="input-crew-nome">Nome</label>
+                    <input type="text" id="input-crew-nome" name="crew-name" class="contact-input">
                 </div>
-                <div id="crew-reputation-container">
-                    <label class="contact-label">Reputação</label>
-                    <input type="text" name="crew-reputation" class="contact-input">
+
+                <div id="crew-reputation-container" class="input-field">
+                    <label for="input-crew-reputation">Reputação</label>
+                    <select id="input-crew-reputation" name="crew-reputation" class="contact-input">
+                        <option value="">Selecione a reputação</option>
+                    </select>
                 </div>
-                <div id="crew-den-container">
-                    <label class="contact-label">Covil</label>
-                    <input type="text" name="crew-den" class="contact-input">
+                <div id="crew-den-container" class="input-field">
+                    <label for="input-crew-den">Covil</label>
+                    <input type="text" id="input-crew-den" name="crew-den" class="contact-input">
                 </div>
-                <div id="crew-size-container">
-                    <label class="contact-label">Tamanho</label>
-                    <input type="text" name="crew-size" class="contact-input">
+                <div id="crew-hunting-grounds-container" class="input-field">
+                    <label for="input-crew-hunting-grounds">Territórios de caça</label>
+                    <input type="text" id="input-crew-hunting-grounds" name="crew-hunting-grounds" class="contact-input">
                 </div>
             </section>
-            
+        </article>
+
+        <article id="crew-meta-article">
             <section class="crew-meta-section">
-                <div id="crew-morale-container">
+                <div id="crew-morale-territory-container">
                     <!-- Morale banner space-->
                 </div>
-                <div id="crew-postition-container">
+                <div id="crew-heat-container">
                     <!-- Heat banner space-->
                 </div>
-
+                <div id="crew-control-category-container">
+                    <!-- Position banner space-->
+                </div>
+                <div id="crew-coin-vault-container">
+                    <!-- Position banner space-->
+                </div>
             </section>
+        </article>
+
+        <article id="crew-playbook-article">
+            <section id="crew-playbook" class="section-playbook-moves">
+            <div id="playbook-header-selector" class="playbook-header-selector">
+                <select id="crew-playbook-selector" class="playbook-selector">
+                    <option value="">Selecione o playbook</option>
+                </select>
+                <div id="crew-playbook-container" class="bannerContainer"></div>
+            </div>
+            <div id="crew-movement-container" class="movement-container">
+                <span>Habilidades Especiais</span>
+            </div>
+            </section>
+            <section id="crew-amigos-container" class="section-amigos-estranhos">
+            </section>
+            <section id="crew-territories-container" class="crew-territories-container">
+            </section>
+            <section id="crew-upgrades-container" class="section-playbook-itens">
+            </section>
+        </article>
+
+        <article id="crew-notes-article">
+            <section class="crew-notes-section">
+                <div id="crew-notes-container" class="input-field">
+                    <label for="input-crew-notes">Notas</label>
+                    <textarea id="input-crew-notes" name="crew-notes" class="contact-input" rows="4"></textarea>
+                </div>
+            </section>
+        </article>
+
     </main>
-
-    <footer>
-        
-    </footer>
-
+    <footer id="site-footer"></footer>
 </body>
 </html>

@@ -4,8 +4,7 @@
     font-weight: normal;
     font-style: normal;
 }
-
-body {
+:root {
     --color-orange: #f06900;
     --color-blue: #0f96ff;
     --color-dark: #020308;
@@ -30,7 +29,10 @@ body {
     --clock-description-width: 300px;
     --clock-border-thickness: 4px;
     --new-clock-button-diameter: 50px;
+}
 
+
+body {
     font-family: 'Kirsty';
     margin: 0;
     background: var(--color-dark);

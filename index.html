@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <title id="pageTitle">Dungeon World - Ficha de Personagem </title>
+    <title id="pageTitle">Blades in the Dark - Ficha de Personagem </title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
@@ -9,62 +9,22 @@
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <link rel="manifest" href="./manifest.json" />
 
-    <script>
-      if ('serviceWorker' in navigator)
-        navigator.serviceWorker.register('./service-worker.js');
-    </script>
-    <!-- Google tag (gtag.js) -->
+    <script type="module" src="./js/layout.js" defer></script>
+    <script type="module" src="./js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
+        <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
     <script>
+      if ('serviceWorker' in navigator) navigator.serviceWorker.register('./js/service-worker.js');
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-TCJEV9859Z');
     </script>
 
-
-    <script type="module" src="./js/script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
   </head>
-
   <body>
-    <nav class="floating-nav" >
-      <img src="./assets/blades-logo-red.png" class="logo" alt="Logo" />
-
-        <div style="display:none;">
-          <button class="nav-item active" data-section="character">
-              <span>Character</span>
-          </button>
-
-          <button class="nav-item" data-section="attributes">
-              <span>Attributes</span>
-          </button>
-
-          <button class="nav-item" data-section="moves">
-              <span>Moves</span>
-          </button>
-
-          <button class="nav-item" data-section="equipment">
-              <span>Equipment</span>
-          </button>
-
-          <button class="nav-item" data-section="spells">
-              <span>Spells</span>
-          </button>
-
-          <button class="nav-item" data-section="notes">
-              <span>Notes</span>
-          </button>
-        </div>
-        <div class="nav-item" id="GM-Mode">
-          
-        </div>
-        <div class="save_buttons">
-          <button id="btnGerarCodigo">Salvar ficha</button>
-          <button id="btnRestaurar">Restaurar ficha</button>
-          <button id="btnLimpar">Limpar ficha</button>
-        </div>
+    <nav id="site-nav" class="floating-nav" >
     </nav>
 
     <main id="main">
@@ -155,21 +115,18 @@
             <select id="playbookSelector" class="playbook-selector">
                 <option value="">Selecione o playbook</option>
             </select>
+            <div id="playbookContainer" class="bannerContainer"></div>
           </div>
           <div id="movementContainer" class="movement-container">
-            <span>Habilidades Especias</span>
-
+            <span>Habilidades Especiais</span>
           </div>
           <div id="commonMovementContainer" class="movement-container">
-            <button>Adicionar Movimento</button>
+            <button>Adicionar Habilidade Especial</button>
           </div>
         </section>
         <section id="amigosContainer" class="section-amigos-estranhos">
         </section>
         <section id="itensContainer" class="section-playbook-itens">
-          
-        </section>
-        <section id="xpContainer" class="section-playbook-xp">
         </section>
       </article>
     </main>
@@ -177,10 +134,8 @@
     <!-- Modais são criados dinamicamente pela classe Modal (js/modal.js) -->
     <div id="modalsContainer"></div>
 
-    <footer class="rodape"> 
-      <p>Desenvolvido por <a href="https://github.com/DennisCCunha" target="_blank"><strong>Brocolis.ninja</strong></a></p>
-      <p>Blades in the Dark™ is a trademark of One Seven Design. The Forged in the Dark Logo is © One Seven Design, and is used with permission</p>
-    </footer>
 
+    <footer id="site-footer" class="rodape"></footer>
+    
   </body>
 </html>

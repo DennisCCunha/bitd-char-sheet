@@ -40,7 +40,9 @@ nav{
         height: 3rem;
         width: auto;
     }
+    a,
     button{
+        text-decoration: none;
         border-radius: 0.5rem;
         background-color: var(--black);        
         color: var(--white);
@@ -49,10 +51,17 @@ nav{
         transition: background-color 0.3s, color 0.3s;
         padding: 0.5rem 1rem;
     }
+    a:hover,
     button:hover{
         background-color: var(--light);
         color: var(--black);
     }
+
+    
+
+
+
+
 }
 
 footer{
@@ -383,7 +392,13 @@ input:focus + label {
     }
 }
 
-.playbook-selector{
+.playbook-header-selector{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    .playbook-selector{
     select, ::picker(select) {
     appearance: base-select;
     }
@@ -417,6 +432,7 @@ input:focus + label {
     background-color: #0066cc;
     color: white;
     }
+}
 }
 
 .movement-container{
@@ -489,7 +505,6 @@ input:focus + label {
 
 }
 
-
 .contact-box{
     display: flex;
     flex-direction: row;
@@ -514,10 +529,6 @@ input:focus + label {
     margin-left: 1rem;
     gap: .5rem;
 }
-
-
-
-
 
 .triangle-radio {
     appearance: none;
@@ -572,6 +583,18 @@ input:focus + label {
     }
 }
 
+.section-playbook-itens{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.itens-container{
+    display: flex;
+    flex-direction: column;
+    
+}
 
 .item-box{
     display: flex;
@@ -581,10 +604,16 @@ input:focus + label {
     padding: 0.3rem;
 }
 
-.itens-container{
+.label-box{
     display: flex;
-    flex-direction: column;
-    
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--black);
+    margin-bottom: .5rem;
+    width: 100%;
+    padding-left: 1.5rem;
+    box-sizing: border-box;
+    background-color: var(--focus);
 }
 
 .item-name{
@@ -702,6 +731,179 @@ input:focus + label {
         background-color: var(--muted);
         color: var(--black);
     }
+}
+
+/* Crew sheet */
+.save_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.4rem;
+}
+
+.crew-information-section,
+.crew-meta-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 0.75rem 1rem;
+    width: 100%;
+}
+
+.crew-meta-section > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.crew-tracker {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-width: 0;
+}
+
+.crew-tracker > strong,
+#crew-movement-container > h3,
+#crew-amigos-container > h3,
+#crew-territories-container > h3,
+#crew-upgrades-container > h3 {
+    padding: 0.25rem 0.5rem;
+    color: var(--white);
+    background-color: var(--black);
+    font-size: 0.85rem;
+}
+
+.crew-tracker-banners {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    padding: 0.35rem;
+}
+
+.crew-tracker-box {
+    display: grid;
+    place-items: center;
+    width: 1.45rem;
+    height: 1.65rem;
+    border: 1px solid var(--black);
+    background: var(--white);
+    cursor: pointer;
+}
+
+.crew-tracker-box input {
+    appearance: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.crew-tracker-box:has(input:checked) {
+    background: var(--black);
+}
+
+.crew-tracker select {
+    min-height: 2rem;
+    font: inherit;
+}
+
+#crew-playbook-article {
+    width: 100%;
+}
+
+#crew-playbook,
+#crew-amigos-container,
+#crew-territories-container,
+#crew-upgrades-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.4rem;
+}
+
+#crew-movement-container,
+#crew-territories-container,
+#crew-upgrades-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    align-content: start;
+    gap: 0.35rem 1rem;
+}
+
+#crew-movement-container > h3,
+#crew-territories-container > h3,
+#crew-upgrades-container > h3 {
+    grid-column: 1 / -1;
+}
+
+
+.crew-selection-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    border-bottom: 1px solid var(--muted);
+}
+
+.crew-selection {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.35rem;
+    cursor: pointer;
+}
+
+.crew-selection-description {
+    display: block;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.crew-selection input,
+.crew-contact input {
+    flex: 0 0 auto;
+    width: 1rem;
+    height: 1rem;
+    margin: 0.15rem 0 0;
+    accent-color: var(--black);
+}
+
+.crew-contact {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) auto auto auto auto;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem;
+    border-bottom: 1px solid var(--muted);
+}
+
+.crew-contact label {
+    font-size: 0.85rem;
+}
+
+.crew-notes-section,
+#crew-notes-container {
+    width: 100%;
+}
+
+#crew-notes-container {
+    height: auto;
+    min-height: 5rem;
+}
+
+#crew-notes-container textarea {
+    width: 100%;
+    min-height: 4rem;
+    padding: 0.5rem 0;
+    border: 0;
+    border-bottom: 1px solid var(--focus);
+    background: transparent;
+    font: inherit;
+    resize: vertical;
 }
 
 @media (min-width: 768px) {

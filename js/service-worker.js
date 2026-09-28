@@ -1,5 +1,5 @@
 const CACHE = 'bitd-sheet-v1';
-const FILES = ['./index.html'];
+const FILES = ['./index.html', './css/style.css', './js/layout.js', './js/script.js', './crew.html', './heist.html'];
 
 self.addEventListener('install', e => e.waitUntil(
   caches.open(CACHE).then(c => c.addAll(FILES))

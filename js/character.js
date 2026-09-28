@@ -1,4 +1,5 @@
-﻿export default class Character {
+﻿import ruleset from "../data/blades.json" with { type: "json" };
+export default class Character {
     
     constructor() {
         this.nome        = '';
@@ -8,7 +9,7 @@
         this.trauma      = 0;
         this.playbookXP  = 0;
         this.espertezaXP  = 0;
-        this.destrezaXP   = 0;
+        this.valentiaXP   = 0;
         this.conviccaoXP  = 0;
         this.bando       = '';
         this.aparencia   = '';
@@ -16,6 +17,7 @@
         this.raizes      = '';
         this.historia    = '';
         this.notas       = '';
+        this.moedas      = 0;
 
         this.inputs = {};
 
@@ -45,12 +47,12 @@
 
         this.atributoAcao = {
             "convicção": ["comandar", "convencer", "sintonizar","socializar"],
-            "destreza"  : ["brigar", "detonar", "esgueirar", "sutileza"],
+            "valentia"  : ["brigar", "detonar", "esgueirar", "manejar"],
             "esperteza" : ["adulterar", "caçar", "estudar", "sondar"]
-
         };
 
         this.bonds = [];
+
     }
 
     // ─── Serialisation ────────────────────────────────────────────────────────
@@ -85,7 +87,7 @@
             trauma: c.trauma,
             playbookXP: c.playbookXP,
             espertezaXP: c.espertezaXP,
-            destrezaXP: c.destrezaXP,
+            valentiaXP: c.valentiaXP,
             conviccaoXP: c.conviccaoXP,
             bando: c.bando,
             aparencia: c.aparencia,
@@ -113,7 +115,11 @@
     }
 
     static getPlaybooks() {
-         
+        return Object.keys(ruleset.playbooks);
+    }
+
+    static getAttributes() {
+        return Object.keys(ruleset.attributes);
     }
 
 }
