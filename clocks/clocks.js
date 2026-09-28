@@ -1,7 +1,11 @@
 const MIN = 3;
 const INC = 2;
 
+// O modulo monta a interface com jQuery, permite ordenar elementos com Sortable
+// e salva as linhas e os clocks no localStorage antes de a pagina ser fechada.
+// Cada clock guarda seu progresso e sua quantidade de fatias no proprio DOM.
 
+// Cria um elemento div com as classes informadas e anexa os filhos recebidos.
 let d = function(c, ...children) {
     let e = $(`<div class="${c}">`);
     for (let child of children) {
@@ -9,6 +13,8 @@ let d = function(c, ...children) {
     }
     return e;
 }
+
+// Cria um input e aplica seus atributos HTML, como placeholder e tipo.
 let input = function(c, attributes) {
     let e = $(`<input class="${c}">`);
     for (let k in attributes) {
@@ -17,6 +23,8 @@ let input = function(c, attributes) {
     return e;
 }
 
+// Monta uma linha com nome, clocks e controles; Sortable permite reordenar
+// clocks e linhas, enquanto os gestos no puxador recolhem ou removem a linha.
 d.row = function({name='', clocks=[], minimized=false}={name: '', clocks: [], minimized: false}) {
     let e = d('row', 
         d('handle row-handle'), 
@@ -58,10 +66,12 @@ d.row = function({name='', clocks=[], minimized=false}={name: '', clocks: [], mi
         s.destroy();
         e.remove();
     });
-    e.find('.button.bad').on('click', event => add_clock(false, e));
-    e.find('.button.good').on('click', event => add_clock(true, e));
+    e.find('.button.bad').on('click', event => add_clock({row: e}));
+    e.find('.button.good').on('click', event => add_clock({good: true, row: e}));
     return e;
 }
+
+// Cria o controle visual inserido após cada clock para adicionar outro clock.
 d.spawner = function() {
     return d('spawner', 
         d('button bad', 
@@ -80,6 +90,9 @@ d.spawner = function() {
         ), 
     );
 }
+
+// Monta um clock e conecta interações: clique altera o progresso, Shift+scroll
+// redimensiona e os gestos no puxador alternam a cor ou removem o clock.
 d.clock = function({description='', good=false, max=4, progress=undefined}={description: '', good: false, max: 4, progress: undefined}) {
     let e = d('clock', 
         d('banner', 
@@ -95,9 +108,12 @@ d.clock = function({description='', good=false, max=4, progress=undefined}={desc
     e.on('click', event => click_clock(e, event));
     e.find('.widget').on('wheel', event => scale_clock(e, event));
     e.find('.clock-handle').on('click', event => toggle_clock(e, event));
-    e.find('.clock-handle').on('dblclick', event => remove(e, event));
+    e.find('.clock-handle').on('dblclick', event => remove_clock(e, event));
     return e;
 }
+
+// Desenha as fatias e divisores. Se o progresso nao for informado, preserva
+// a quantidade atual de fatias preenchidas, limitada ao novo tamanho.
 d.clock.populate = function(e, n, progress) {
     progress = progress == undefined ? Math.min(e.find('.slice[filled]').length, n) : progress;
     let core = e.find('.core');
@@ -120,18 +136,25 @@ d.clock.populate = function(e, n, progress) {
     return e;
 }
 
+// Adiciona uma linha vazia ao painel.
 let add_row = function() {
     return d.row().appendTo($('.rows'));
 }
-let add_clock = function(good=false, row=undefined) {
+
+// Cria um clock na linha indicada (ou na ultima linha) e reposiciona o controle
+// de adicao. max define o numero inicial de fatias; o padrao continua sendo 4.
+let add_clock = function({good=false, row=undefined, max=4}={}) {
     row = row ? row : $('.row').last();
     if (row.length == 0) {
         row = add_row();
     }
-    let e = d.clock({good: good}).appendTo(row.find('.clocks'));
+    let e = d.clock({good: good, max: max}).appendTo(row.find('.clocks'));
     row.find('.spawner').insertAfter(e);
     return e;
 }
+
+// Preenche as fatias ate o ponto clicado ou limpa a partir dele, mantendo
+// sempre o progresso como uma sequencia continua desde o inicio do clock.
 let click_clock = function(clock, event) {
     let target = $(event.target);
     if (!target.is('.slice')) {
@@ -148,6 +171,8 @@ let click_clock = function(clock, event) {
     });
     update_clock(clock, i, true);
 }
+
+// Exibe a pre-visualizacao do preenchimento ao passar o mouse sobre uma fatia.
 let update_clock = function(clock, i, inside) {
     if (inside) {
         let filling = clock.find(`.slice[i="${i}"]`).attr('filled') == undefined;
@@ -167,6 +192,8 @@ let update_clock = function(clock, i, inside) {
         clock.find('.slice').removeAttr('will-change');
     }
 }
+
+// Redimensiona o clock com Shift+scroll; o progresso existente e preservado.
 let scale_clock = function(clock, event) {
     if (!event.shiftKey) {
         return;
@@ -183,6 +210,8 @@ let scale_clock = function(clock, event) {
         d.clock.populate(clock, n);
     }
 }
+
+// Alterna a cor do clock entre bom (azul) e ruim (laranja) com Shift+clique.
 let toggle_clock = function(clock, event) {
     if (!event.shiftKey) {
         return;
@@ -195,12 +224,17 @@ let toggle_clock = function(clock, event) {
         clock.attr('bad', '');
     }
 }
-let remove = function(e, event) {
+
+// Remove o clock associado ao puxador com duplo clique, exceto se Shift estiver
+// pressionado, gesto reservado para alternar a cor.
+let remove_clock = function(clock, event) {
     if (event.shiftKey) {
         return;
     }
-    e.remove();
+    clock.remove();
 }
+
+// Abre ou fecha a ajuda contextual com os gestos disponiveis na interface.
 let help = function() {
     let e = $('.help-info');
     if (e.length) {
@@ -219,7 +253,8 @@ let help = function() {
     }
 }
 
-
+// Restaura do localStorage as linhas e clocks salvos, incluindo tamanho e
+// progresso de cada clock.
 let load = function() {
     let rows = $('.rows');
     let data = JSON.parse(window.localStorage.getItem('data'));
@@ -227,6 +262,8 @@ let load = function() {
         d.row(row).appendTo(rows);
     }
 }
+
+// Serializa o estado atual do DOM em JSON para manter o estado entre visitas.
 let save = function() {
     let data = $('.row')
         .map((i, r) => ({
@@ -245,7 +282,7 @@ let save = function() {
     window.localStorage.setItem('data', JSON.stringify(data));
 }
 
-
+// Cria o painel, conecta os botoes, habilita ordenacao e configura carga/salva.
 let initialize = function() {
     let main = d('main', 
         d('menu', 
@@ -258,6 +295,12 @@ let initialize = function() {
             d('button good-clock', 
                 d('text').text('Clock (good)'), 
             ), 
+            d('button clock-six',
+                d('text').text('Clock (6)'),
+            ),
+            d('button clock-eight',
+                d('text').text('Clock (8)'),
+            ),
             d('button help', 
                 d('text').text('?'), 
             ), 
@@ -267,7 +310,9 @@ let initialize = function() {
 
     main.find('.new-row').on('click', e => add_row());
     main.find('.bad-clock').on('click', e => add_clock());
-    main.find('.good-clock').on('click', e => add_clock(true));
+    main.find('.good-clock').on('click', e => add_clock({good: true}));
+    main.find('.clock-six').on('click', e => add_clock({max: 6}));
+    main.find('.clock-eight').on('click', e => add_clock({max: 8}));
     main.find('.help').on('click', e => help());
 
     Sortable.create($('.rows').get(0), {

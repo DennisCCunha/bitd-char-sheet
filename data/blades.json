@@ -496,6 +496,26 @@
             {"id":2004037, "tipo":"Sombras", "nome":"Rigney, dono de taverna"}
         ]
 
+    },
+
+    "heist": {
+        "tipo": [
+            {"nome":"Agressão", "descricao":"Atacar um alvo com violência. Detalhe: o ponto de ataque."},
+            {"nome":"Embuste", "descricao":"Enganar, iludir ou manipular. Detalhe: o método de enganação."},
+            {"nome":"Furtividade", "descricao":"Invadir sem ser notado. Detalhe: o ponto de infiltração."},
+            {"nome":"Ocultismo", "descricao":"Lidar com um poder sobrenatural. Detalhe: o método arcano."},
+            {"nome":"Social", "descricao":"Negociar, barganhar ou persuadir. Detalhe: a relação social."},
+            {"nome":"Transporte", "descricao":"Mover carga ou pessoas através de ameaças. Detalhe: a rota."}
+        ]
+    },
+
+    "mundo":{
+        "cidades": [
+            {"nome":"Doskvol", "descricao":"Descrição da cidade exemplo."}
+        ],
+        "faccções": [
+            {"natureza":"Exemplo", "nome":"Facção Exemplo", "categoria":"Categoria Exemplo", "descricao":"Descrição da facção exemplo."}
+        ]
     }
 
 }
