@@ -906,6 +906,118 @@ input:focus + label {
     resize: vertical;
 }
 
+/* Heist sheet */
+.heist-page {
+    align-items: stretch;
+}
+
+#heist-article,
+#heist-clocks-article {
+    width: 100%;
+    min-width: 0;
+}
+
+#heist-article {
+    flex: 1 1 42rem;
+}
+
+#heist-clocks-article {
+    flex: 1 1 100%;
+}
+
+.heist-information-section,
+.heist-rewards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+    gap: 0.75rem 1rem;
+    width: 100%;
+}
+
+.heist-section {
+    width: 100%;
+}
+
+.heist-section h2 {
+    margin: 0 0 0.75rem;
+    padding: 0.25rem 0.5rem;
+    color: var(--white);
+    background-color: var(--black);
+    font-size: 0.9rem;
+}
+
+.heist-type-description {
+    display: block;
+    margin-top: 0.4rem;
+    color: var(--black);
+    font-size: 0.75rem;
+}
+
+.heist-section-heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.heist-faction-row {
+    display: grid;
+    grid-template-columns: minmax(8rem, 1fr) minmax(12rem, 2fr) auto;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--muted);
+}
+
+.heist-faction-row input,
+.heist-notes-field textarea {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    border-bottom: 1px solid var(--focus);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    padding: 0.5rem 0;
+}
+
+.heist-faction-row button {
+    white-space: nowrap;
+}
+
+.heist-empty-state {
+    margin: 0;
+    padding: 0.75rem 0;
+    color: var(--black);
+}
+
+.heist-notes-field {
+    height: auto;
+    min-height: 7rem;
+}
+
+.heist-notes-field label {
+    position: static;
+    display: block;
+    margin-bottom: 0.35rem;
+}
+
+.heist-notes-field textarea {
+    min-height: 6rem;
+    resize: vertical;
+}
+
+@media (max-width: 600px) {
+    .heist-faction-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .heist-faction-row input:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
+}
+
 @media (min-width: 768px) {
     nav{
         display: flex;
