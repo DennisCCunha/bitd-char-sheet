@@ -1,199 +1,224 @@
-@font-face {
-    font-family: 'Kirsty';
-    src:url('Kirsty.ttf.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-:root {
+.clocks-app {
     --color-orange: #f06900;
     --color-blue: #0f96ff;
-    --color-dark: #020308;
-    --color-mid: #101116;
-    --color-light: #44454a;
-    --color-bright: white;
-    --color-scrollbar-bg: var(--color-dark);
-    --color-scrollbar-fg: var(--color-light);
-    --color-clock-border: var(--color-dark);
-
-    --font-size-button: 2em;
-    --font-size-row: 3em;
-    --font-size-clock: 2em;
-
-    --row-handle-width: 30px;
-    --clock-handle-size: 40px;
-    --clock-size: 150px;
-    --clock-disc-size: 80px;
-    --scrollbar-thickness: 12px;
-    --row-inner-height: calc(var(--clock-size) + var(--clock-handle-size) + 4px + var(--scrollbar-thickness));
-    --row-height: calc(var(--row-inner-height) + var(--font-size-row));
-    --clock-description-width: 300px;
-    --clock-border-thickness: 4px;
-    --new-clock-button-diameter: 50px;
-}
-
-
-body {
-    font-family: 'Kirsty';
-    margin: 0;
-    background: var(--color-dark);
-}
-.main {
+    --color-dark: #17191d;
+    --color-mid: #272a2f;
+    --color-light: #777b83;
+    --color-bright: #f5f5f2;
+    --color-clock-border: #090a0c;
+    --font-size-button: 0.95rem;
+    --font-size-row: 1.2rem;
+    --font-size-clock: 1rem;
+    --row-handle-width: 22px;
+    --clock-handle-size: 28px;
+    --clock-size: 142px;
+    --clock-description-width: 220px;
+    --clock-border-thickness: 3px;
+    --new-clock-button-diameter: 40px;
     position: relative;
-    height: 100%;
     display: flex;
     flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    padding: 0.75rem;
+    overflow: hidden;
+    color: var(--color-bright);
+    background: var(--color-dark);
+    font-family: inherit;
 }
-input {
+
+.clocks-app,
+.clocks-app * {
+    box-sizing: border-box;
+}
+
+.clocks-app input {
     outline: none;
     border: none;
     background: none;
-    font-family: 'Kirsty';
+    color: inherit;
+    font: inherit;
 }
-input::placeholder {
+
+.clocks-app input::placeholder {
     color: var(--color-light);
 }
 
-/* Scrollbar customization. */
-::-webkit-scrollbar-track {
-    border: 2px solid var(--color-scrollbar-bg);
-    background-color: var(--color-scrollbar-bg);
-}
-::-webkit-scrollbar {
-    width: var(--scrollbar-thickness);
-    height: var(--scrollbar-thickness);
-    background-color: var(--color-scrollbar-bg);
-}
-::-webkit-scrollbar-thumb {
-    border: 2px solid var(--color-scrollbar-bg);
-    border-radius: 10px;
-    background-color: var(--color-scrollbar-fg);
+.clocks-app .menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.25rem;
+    width: 100%;
+    min-height: 42px;
+    margin-bottom: 0.5rem;
 }
 
-/* Menu. */
-.menu {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-.menu .button {
-    padding: 0 15px;
+.clocks-app .menu .button {
+    padding: 0.35rem 0.55rem;
+    color: var(--color-bright);
+    font-size: var(--font-size-button);
     font-weight: bold;
     cursor: pointer;
 }
-.menu .button .text {
-    margin-top: 8px;
-    font-size: var(--font-size-button);
-    color: var(--color-bright);
-}
-.menu .button:not(.help) .text::before {
+
+.clocks-app .menu .button:not(.help) .text::before {
     content: "+ ";
 }
-.menu .button.new-row .text::before {
+
+.clocks-app .menu .button.new-row .text::before,
+.clocks-app .menu .button.clock-six .text::before,
+.clocks-app .menu .button.clock-eight .text::before {
     color: var(--color-light);
 }
-.menu .button.bad-clock .text::before {
+
+.clocks-app .menu .button.bad-clock .text::before {
     color: var(--color-orange);
 }
-.menu .button.good-clock .text::before {
+
+.clocks-app .menu .button.good-clock .text::before {
     color: var(--color-blue);
 }
-.menu .button.clock-six .text::before,
-.menu .button.clock-eight .text::before {
+
+.clocks-app .menu .help .text {
     color: var(--color-light);
 }
-.menu .help .text {
-    color: var(--color-light);
-}
-.menu .button:hover {
+
+.clocks-app .menu .button:hover {
     background: var(--color-mid);
 }
 
-/* Rows. */
-.rows {
+.clocks-app .rows {
     flex-grow: 1;
+    min-width: 0;
 }
-.row {
-    height: var(--row-height);
+
+.clocks-app .row {
     display: flex;
-    margin-bottom: 25px;
+    min-width: 0;
+    height: calc(var(--clock-size) + var(--clock-handle-size) + 2.5rem);
+    margin-bottom: 1rem;
 }
-.row > .handle {
+
+.clocks-app .row > .handle {
+    flex: 0 0 var(--row-handle-width);
     height: 100%;
-    width: var(--row-handle-width);
-    margin-right: 10px;
+    margin-right: 0.5rem;
     border-right: calc(2 * var(--clock-border-thickness)) solid var(--color-mid);
-    box-sizing: border-box;
     cursor: move;
 }
-.row .inner {
-    flex-grow: 1;
-    overflow-y: hidden;
+
+.clocks-app .row .inner {
+    flex: 1 1 auto;
+    min-width: 0;
     overflow-x: auto;
+    overflow-y: hidden;
 }
-.row .name {
+
+.clocks-app .row .name {
+    max-width: 100%;
     font-size: var(--font-size-row);
     color: var(--color-bright);
 }
-.row .clocks {
-    height: var(--row-inner-height);
-    box-sizing: border-box;
-    padding-right: var(--row-handle-width);
+
+.clocks-app .row .clocks {
     display: flex;
+    align-items: flex-start;
+    height: calc(var(--clock-size) + var(--clock-handle-size) + 0.5rem);
+    padding-right: var(--row-handle-width);
 }
-.row[minimized] {
-    height: calc(var(--row-height) - var(--row-inner-height));
+
+.clocks-app .row[minimized] {
+    height: 2rem;
 }
-.row[minimized] .clocks {
+
+.clocks-app .row[minimized] .clocks {
     display: none;
 }
 
-/* Clocks. */
-.clock {
-    --angle: calc(360deg / var(--n));
+.clocks-app .clock {
     display: flex;
     flex-direction: column;
+    flex: 0 0 auto;
+    --angle: calc(360deg / var(--n));
 }
-.clock[good] {
+
+.clocks-app .clock[good] {
     --clock-color: var(--color-blue);
 }
-.clock[bad] {
+
+.clocks-app .clock[bad] {
     --clock-color: var(--color-orange);
 }
-.clock .banner {
+
+.clocks-app .clock .banner {
     display: flex;
+    width: var(--clock-size);
 }
-.clock .handle {
+
+.clocks-app .clock .handle {
+    flex: 0 0 var(--clock-handle-size);
     height: var(--clock-handle-size);
     width: var(--clock-handle-size);
-    margin-right: 5px;
+    margin-right: 0.3rem;
     border-right: calc(2 * var(--clock-border-thickness)) solid var(--color-mid);
-    box-sizing: border-box;
     cursor: move;
 }
-.handle:hover {
+
+.clocks-app .handle:hover {
     border-color: var(--color-light);
 }
-.clock .description {
-    width: var(--clock-description-width);
+
+.clocks-app .clock .description {
+    position: static;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
     font-size: var(--font-size-clock);
     color: var(--clock-color);
 }
-.clock .widget {
+
+.clocks-app .clock .delete-clock {
+    flex: 0 0 1.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--color-mid);
+    background: transparent;
+    color: var(--color-light);
+    font: inherit;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.clocks-app .clock .delete-clock:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+}
+
+.clocks-app .clock .delete-clock:focus-visible {
+    outline: 2px solid var(--color-orange);
+    outline-offset: 2px;
+}
+
+.clocks-app .clock .widget {
     position: relative;
+    flex: 0 0 var(--clock-size);
     height: var(--clock-size);
     width: var(--clock-size);
 }
-.clock .core {
+
+.clocks-app .clock .core {
     position: absolute;
     height: 100%;
     width: 100%;
     border: var(--clock-border-thickness) solid var(--color-clock-border);
     border-radius: 50%;
-    box-sizing: border-box;
     overflow: hidden;
 }
-.clock .slice {
+
+.clocks-app .clock .slice {
     --o: 10%;
     position: absolute;
     top: calc(-1 * var(--o));
@@ -204,35 +229,30 @@ input::placeholder {
     transform-origin: bottom left;
     transform: rotate(calc(var(--i) * var(--angle))) skewY(calc(-90deg + var(--angle)));
 }
-.clock .slice[filled] {
+
+.clocks-app .clock .slice[filled] {
     background: var(--clock-color);
 }
-.clock .slice:not([filled])[will-change] {
+
+.clocks-app .clock .slice:not([filled])[will-change] {
     background: var(--clock-color);
     filter: brightness(0.5);
 }
-.clock .slice[filled][will-change] {
+
+.clocks-app .clock .slice[filled][will-change] {
     background: var(--color-light);
 }
-.clock .slice:not([filled]):hover {
+
+.clocks-app .clock .slice:not([filled]):hover {
     background: var(--clock-color);
     filter: brightness(1.5);
 }
-.clock .slice[filled]:hover {
+
+.clocks-app .clock .slice[filled]:hover {
     background: var(--color-bright);
 }
-.clock .disc {
-    --offset: calc((var(--clock-size) - var(--clock-disc-size)) / 2);
-    position: absolute;
-    top: var(--offset);
-    left: var(--offset);
-    height: var(--clock-disc-size);
-    width: var(--clock-disc-size);
-    border-radius: 50%;
-    background: var(--color-clock-border);
-    pointer-events: none;
-}
-.clock .bar {
+
+.clocks-app .clock .bar {
     --w: calc(2 * var(--clock-border-thickness));
     --h: 60%;
     position: absolute;
@@ -244,90 +264,104 @@ input::placeholder {
     transform: rotate(calc(var(--i) * var(--angle)));
     pointer-events: none;
 }
-.clock .bar .paint {
+
+.clocks-app .clock .bar .paint {
     margin-left: calc(-0.5 * var(--w));
     height: 100%;
     width: 100%;
     background: var(--color-clock-border);
 }
 
-.help-info {
+.clocks-app .help-info {
     --w: 0;
     position: absolute;
-    top: 60px;
-    left: calc(50% - (0.5 * var(--w)));
-    font-family: sans-serif;
-    padding: 10px;
-    font-size: 1.5em;
-    border-radius: 5px;
+    z-index: 2;
+    top: 3rem;
+    left: 50%;
+    max-width: calc(100% - 1rem);
+    padding: 0.65rem;
+    transform: translateX(-50%);
+    border-radius: 4px;
     background: var(--color-mid);
     color: var(--color-bright);
-    z-index: 2;
+    font-family: sans-serif;
+    font-size: 0.9rem;
 }
-.help-info .text {
+
+.clocks-app .help-info .text {
     pointer-events: none;
 }
-.help-info .text b {
+
+.clocks-app .help-info .text b {
     color: var(--color-orange);
 }
 
-.spawner {
+.clocks-app .spawner {
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
-[dragging] .spawner {
+
+.clocks-app [dragging] .spawner {
     display: none;
 }
-.spawner .button {
-    --d: 80px;
-    height: var(--d);
-    width: var(--d);
+
+.clocks-app .spawner .button {
+    --d: 64px;
     display: flex;
     justify-content: center;
+    width: var(--d);
+    height: var(--d);
     cursor: pointer;
 }
-.spawner .icon {
+
+.clocks-app .spawner .icon {
     --s: calc(2 * var(--clock-border-thickness));
     --w: var(--new-clock-button-diameter);
     --h: calc(0.5 * var(--w));
     --border-color: var(--color-mid);
-    height: var(--h);
     width: var(--w);
-    border-top-left-radius: var(--h);
-    border-top-right-radius: var(--h);
+    height: var(--h);
     border: var(--s) solid var(--border-color);
     border-bottom: 0;
-    box-sizing: border-box;
+    border-top-left-radius: var(--h);
+    border-top-right-radius: var(--h);
 }
-.spawner .button:hover .icon {
+
+.clocks-app .spawner .button:hover .icon {
     --border-color: var(--color);
 }
-.spawner .button.bad .icon {
+
+.clocks-app .spawner .button.bad .icon {
     --color: var(--color-orange);
     margin-top: calc(var(--d) - var(--h));
 }
-.spawner .button.good .icon {
+
+.clocks-app .spawner .button.good .icon {
     --color: var(--color-blue);
     transform: scaleY(-1);
 }
-.spawner .bar {
+
+.clocks-app .spawner .bar {
     position: relative;
-    width: 100%;
     z-index: 1;
+    width: 100%;
     pointer-events: none;
 }
-.spawner .bar .paint {
+
+.clocks-app .spawner .bar .paint {
     position: absolute;
     top: calc(-1 * var(--clock-border-thickness));
     height: calc(2 * var(--clock-border-thickness));
     width: 100%;
     background: var(--color-dark);
 }
-.spawner .bar .strokes {
+
+.clocks-app .spawner .bar .strokes {
     background: #f003;
 }
-.spawner .bar .stroke {
+
+.clocks-app .spawner .bar .stroke {
     --h: 4px;
     --w: 16px;
     position: absolute;
@@ -337,7 +371,23 @@ input::placeholder {
     width: var(--w);
     background: var(--color-mid);
 }
-.spawner .bar .stroke.s2 {
+
+.clocks-app .spawner .bar .stroke.s2 {
     transform-origin: center;
     transform: rotate(90deg);
+}
+
+@media (max-width: 600px) {
+    .clocks-app {
+        padding: 0.5rem;
+    }
+
+    .clocks-app .menu {
+        justify-content: flex-start;
+    }
+
+    .clocks-app .menu .button {
+        padding: 0.3rem;
+        font-size: 0.85rem;
+    }
 }

@@ -1,84 +1,96 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heist</title>
-    <link rel="stylesheet" href="css/style.css">
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+    <title>Blades in the Dark - Golpe</title>
+    <link rel="icon" type="image/png" href="./assets/favicon.png">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./clocks/clocks.css">
+    <link rel="manifest" href="./manifest.json">
 
-        gtag('config', 'G-TCJEV9859Z');
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js" defer></script>
     <script type="module" src="./js/layout.js" defer></script>
-    <script type="module" src="./js/script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
     <script type="module" src="./js/heist.js" defer></script>
 
 </head>
 <body>
-    <nav id="site-nav" class="floating-nav">
-    </nav>
-    <main>
-        <article id="">
-            <section> 
-                <div>
-                    <label for="heist-name">Golpe</label>
-                    <input type="text" id="heist-name" name="heist-name">
+    <nav id="site-nav" class="floating-nav"></nav>
+
+    <main id="main" class="heist-page">
+        <article id="heist-article">
+            <section class="heist-information-section">
+                <div class="input-field">
+                    <label for="heist-name">Nome do golpe</label>
+                    <input type="text" id="heist-name" name="heist-name" data-heist-field>
                 </div>
-                <div>
-                    <label for="heist-type">Tipo de Golpe</label>
-                    <input type="text" id="heist-type" name="heist-type">
+                <div class="input-field">
+                    <label for="heist-type">Tipo de golpe</label>
+                    <select id="heist-type" name="heist-type" data-heist-field>
+                        <option value="">Selecione o tipo</option>
+                    </select>
+                    <small id="heist-type-description" class="heist-type-description"></small>
                 </div>
-                <div>
+                <div class="input-field">
                     <label for="heist-target">Alvo</label>
-                    <input type="text" id="heist-target" name="heist-target">
+                    <input type="text" id="heist-target" name="heist-target" data-heist-field>
                 </div>
-                <div>
+                <div class="input-field">
                     <label for="heist-detail">Detalhe</label>
-                    <input type="text" id="heist-detail" name="heist-detail">
+                    <input type="text" id="heist-detail" name="heist-detail" data-heist-field>
                 </div>
-                <div>
+                <div class="input-field">
                     <label for="heist-situation">Situação</label>
-                    <input type="text" id="heist-situation" name="heist-situation">
+                    <input type="text" id="heist-situation" name="heist-situation" data-heist-field>
                 </div>
             </section>
-            <section>
-                <div>
-                    <span>Interação com Outras Facções</span>
-                    <div id="heist-faction-interaction"></div>
+
+            <section id="heist-factions-section" class="heist-section">
+                <div class="heist-section-heading">
+                    <h2>Interação com facções</h2>
+                    <button id="heist-add-faction" type="button">Adicionar facção</button>
+                </div>
+                <datalist id="heist-faction-options"></datalist>
+                <div id="heist-faction-interaction" aria-live="polite"></div>
+            </section>
+
+            <section id="heist-rewards-section" class="heist-section">
+                <h2>Recompensas e consequências</h2>
+                <div class="heist-rewards-grid">
+                    <div class="input-field">
+                        <label for="heist-moedas">Moedas</label>
+                        <input type="number" id="heist-moedas" name="heist-moedas" min="0" step="1" data-heist-field>
+                    </div>
+                    <div class="input-field">
+                        <label for="heist-moral">Moral</label>
+                        <input type="number" id="heist-moral" name="heist-moral" min="0" step="1" data-heist-field>
+                    </div>
+                    <div class="input-field">
+                        <label for="heist-atencao">Atenção</label>
+                        <input type="number" id="heist-atencao" name="heist-atencao" min="0" step="1" data-heist-field>
+                    </div>
+                </div>
+            </section>
+
+            <section id="heist-notes-section" class="heist-section">
+                <h2>Notas do golpe</h2>
+                <div class="input-field heist-notes-field">
+                    <label for="heist-notes">Planejamento, descobertas e consequências</label>
+                    <textarea id="heist-notes" name="heist-notes" rows="5" data-heist-field></textarea>
                 </div>
             </section>
         </article>
-        <article>
-            <section>
-                <div>
-                    <label for="heist-notes">Notas</label>
-                    <quill-editor id="heist-notes" name="heist-notes"></quill-editor>
-                </div>
-            </section>
-        </article>
-        <article>
-            <section>
-                <div>
-                    <span>Recompensas: </span>
-                    <label for="heist-moedas">Moedas</label>
-                    <input type="number" id="heist-moedas" name="heist-moedas">
-                    <label for="heist-moral">Moral</label>
-                    <input type="number" id="heist-moral" name="heist-moral">
-                </div>
-                <div>   
-                    <label for="heist-atencao">Atenção</label>
-                    <input type="number" id="heist-atencao" name="heist-atencao">
-                </div>
+
+        <article id="heist-clocks-article">
+            <section class="heist-section">
+                <h2>Relógios do golpe</h2>
+                <div id="heist-clocks-container"></div>
             </section>
         </article>
     </main>
-    <footer id="site-footer">
-    </footer>
+
+    <div id="modalsContainer"></div>
+    <footer id="site-footer"></footer>
 </body>
 </html>
