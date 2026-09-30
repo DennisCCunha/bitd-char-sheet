@@ -1,352 +1,381 @@
+import Sortable from 'https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/modular/sortable.complete.esm.js';
 const MIN = 3;
 const INC = 2;
 
-// O modulo monta a interface com jQuery e Sortable e salva linhas e clocks no
+// O modulo monta a interface com DOM nativo e Sortable e salva linhas e clocks no
 // localStorage. A funcao exportada permite montar o gerenciador em um container.
 
 // Cria um elemento div com as classes informadas e anexa os filhos recebidos.
-let d = function(c, ...children) {
-    let e = $(`<div class="${c}">`);
-    for (let child of children) {
-        child.appendTo(e);
+const createElement = function(classes, ...children) {
+    const element = document.createElement('div');
+    element.className = classes;
+    for (const child of children) {
+        element.append(child);
     }
-    return e;
-}
+    return element;
+};
 
 // Cria um input e aplica seus atributos HTML, como placeholder e tipo.
-let input = function(c, attributes) {
-    let e = $(`<input class="${c}">`);
-    for (let k in attributes) {
-        e.attr(k, attributes[k]);
+const createInput = function(classes, attributes) {
+    const element = document.createElement('input');
+    element.className = classes;
+    for (const [name, value] of Object.entries(attributes)) {
+        element.setAttribute(name, value);
     }
-    return e;
-}
+    return element;
+};
+
+const createText = function(classes, text) {
+    const element = createElement(classes);
+    element.textContent = text;
+    return element;
+};
+
+const createHelpText = function(emphasis, description) {
+    const emphasizedText = document.createElement('b');
+    emphasizedText.textContent = emphasis;
+    return createElement('text', emphasizedText, document.createTextNode(description));
+};
 
 // Monta uma linha com nome, clocks e controles; Sortable permite reordenar
 // clocks e linhas, enquanto os gestos no puxador recolhem ou removem a linha.
-d.row = function({name='', clocks=[], minimized=false}={name: '', clocks: [], minimized: false}, root) {
-    let e = d('row', 
-        d('handle row-handle'), 
-        d('inner', 
-            input('name', {placeholder: 'Row'}).val(name), 
-            d('clocks', 
-                ...clocks.map(c => d.clock(c)), 
-                d.spawner(), 
-            ), 
-        ), 
+const createRow = function({name = '', clocks = [], minimized = false} = {}, root) {
+    const row = createElement('row',
+        createElement('handle row-handle'),
+        createElement('inner',
+            Object.assign(createInput('name', {placeholder: 'Row'}), {value: name}),
+            createElement('clocks',
+                ...clocks.map(createClock),
+                createSpawner(),
+            ),
+        ),
     );
     if (minimized) {
-        e.attr('minimized', '');
+        row.setAttribute('minimized', '');
     }
-    let s = Sortable.create(e.find('.clocks').get(0), {
+    const sortable = Sortable.create(row.querySelector('.clocks'), {
         handle: '.clock-handle',
-        animation: 150, 
-        ghostClass: 'dragged-item', 
-        onStart: event => root.find('.rows').attr('dragging', ''),
-        onEnd: event => {
-            root.find('.row').each((i, r) => {
-                let e = $(r);
-                e.find('.spawner').insertAfter(e.find('.clock').last());
+        animation: 150,
+        ghostClass: 'dragged-item',
+        onStart: () => root.querySelector('.rows').setAttribute('dragging', ''),
+        onEnd: () => {
+            root.querySelectorAll('.row').forEach(currentRow => {
+                const clocks = currentRow.querySelectorAll('.clock');
+                const lastClock = clocks[clocks.length - 1];
+                if (lastClock) {
+                    lastClock.after(currentRow.querySelector('.spawner'));
+                }
             });
-            root.find('.rows').removeAttr('dragging');
-        }, 
+            root.querySelector('.rows').removeAttribute('dragging');
+        },
     });
-    s.option('group', {
-        name: 'clocks', 
-        pull: true, 
-        put: ['clocks'], 
+    sortable.option('group', {
+        name: 'clocks',
+        pull: true,
+        put: ['clocks'],
     });
-    e.find('.row-handle').on('click', event => {
+    row.querySelector('.row-handle').addEventListener('click', event => {
         if (event.shiftKey) {
-            e.is('[minimized]') ? e.removeAttr('minimized') : e.attr('minimized', '');
+            row.toggleAttribute('minimized');
         }
     });
-    e.find('.row-handle').on('dblclick', event => {
-        s.destroy();
-        e.remove();
+    row.querySelector('.row-handle').addEventListener('dblclick', () => {
+        sortable.destroy();
+        row.remove();
     });
-    e.find('.button.bad').on('click', event => add_clock({row: e, root}));
-    e.find('.button.good').on('click', event => add_clock({good: true, row: e, root}));
-    return e;
-}
+    row.querySelector('.button.bad').addEventListener('click', () => addClock({row, root}));
+    row.querySelector('.button.good').addEventListener('click', () => addClock({good: true, row, root}));
+    return row;
+};
 
 // Cria o controle visual inserido após cada clock para adicionar outro clock.
-d.spawner = function() {
-    return d('spawner', 
-        d('button bad', 
-            d('icon'), 
-        ), 
-        d('bar', 
-            d('paint', 
-                d('strokes', 
-                    d('stroke s1'), 
-                    d('stroke s2'), 
-                ), 
-            ), 
-        ), 
-        d('button good', 
-            d('icon'), 
-        ), 
+const createSpawner = function() {
+    return createElement('spawner',
+        createElement('button bad',
+            createElement('icon'),
+        ),
+        createElement('bar',
+            createElement('paint',
+                createElement('strokes',
+                    createElement('stroke s1'),
+                    createElement('stroke s2'),
+                ),
+            ),
+        ),
+        createElement('button good',
+            createElement('icon'),
+        ),
     );
-}
+};
 
 // Monta um clock e conecta interações: clique altera o progresso, Shift+scroll
 // redimensiona e os gestos no puxador alternam a cor ou removem o clock.
-d.clock = function({description='', good=false, max=4, progress=undefined}={description: '', good: false, max: 4, progress: undefined}) {
-    let e = d('clock', 
-        d('banner', 
-            d('handle clock-handle'), 
-            input('description', {placeholder: 'Clock'}).val(description), 
-            $('<button type="button" class="delete-clock" aria-label="Excluir relógio" title="Excluir relógio">×</button>'),
-        ), 
-        d('widget', 
-            d('core'), 
-        ), 
-    ).attr(good ? 'good' : 'bad', '')
-    d.clock.populate(e, max, progress);
-    e.on('click', event => click_clock(e, event));
-    e.find('.widget').on('wheel', event => scale_clock(e, event));
-    e.find('.clock-handle').on('click', event => toggle_clock(e, event));
-    e.find('.clock-handle').on('dblclick', event => remove_clock(e, event));
-    e.find('.delete-clock').on('click', event => {
+const createClock = function({description = '', good = false, max = 4, progress} = {}) {
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'delete-clock';
+    deleteButton.setAttribute('aria-label', 'Excluir relógio');
+    deleteButton.title = 'Excluir relógio';
+    deleteButton.textContent = '×';
+
+    const clock = createElement('clock',
+        createElement('banner',
+            createElement('handle clock-handle'),
+            Object.assign(createInput('description', {placeholder: 'Clock'}), {value: description}),
+            deleteButton,
+        ),
+        createElement('widget',
+            createElement('core'),
+        ),
+    );
+    clock.setAttribute(good ? 'good' : 'bad', '');
+    populateClock(clock, max, progress);
+    clock.addEventListener('click', event => clickClock(clock, event));
+    clock.querySelector('.widget').addEventListener('wheel', event => scaleClock(clock, event));
+    clock.querySelector('.clock-handle').addEventListener('click', event => toggleClock(clock, event));
+    clock.querySelector('.clock-handle').addEventListener('dblclick', event => removeClock(clock, event));
+    clock.querySelector('.delete-clock').addEventListener('click', event => {
         event.preventDefault();
         event.stopPropagation();
-        remove_clock(e, event, true);
+        removeClock(clock, event, true);
     });
-    return e;
-}
+    return clock;
+};
 
 // Desenha as fatias e divisores. Se o progresso nao for informado, preserva
 // a quantidade atual de fatias preenchidas, limitada ao novo tamanho.
-d.clock.populate = function(e, n, progress) {
-    progress = progress == undefined ? Math.min(e.find('.slice[filled]').length, n) : progress;
-    let core = e.find('.core');
-    core.empty();
-    for (let i = 0; i < n; i++) {
-        let slice = d('slice').attr('i', i).appendTo(core);
-        slice.get(0).style.setProperty('--i', i);
-        slice.mouseenter(() => update_clock(e, i, true));
-        slice.mouseleave(() => update_clock(e, i, false));
+const populateClock = function(clock, size, progress) {
+    progress = progress == undefined ? Math.min(clock.querySelectorAll('.slice[filled]').length, size) : progress;
+    const core = clock.querySelector('.core');
+    core.replaceChildren();
+    for (let i = 0; i < size; i++) {
+        const slice = createElement('slice');
+        slice.setAttribute('i', i);
+        slice.style.setProperty('--i', i);
+        slice.addEventListener('mouseenter', () => updateClockPreview(clock, i, true));
+        slice.addEventListener('mouseleave', () => updateClockPreview(clock, i, false));
         if (i < progress) {
-            slice.attr('filled', '');
+            slice.setAttribute('filled', '');
         }
+        core.append(slice);
     }
-    for (let i = 0; i < n; i++) {
-        let bar = d('bar', d('paint')).attr('i', i).appendTo(core);
-        bar.get(0).style.setProperty('--i', i);
+    for (let i = 0; i < size; i++) {
+        const bar = createElement('bar', createElement('paint'));
+        bar.setAttribute('i', i);
+        bar.style.setProperty('--i', i);
+        core.append(bar);
     }
-    e.attr('n', n);
-    e.get(0).style.setProperty('--n', n);
-    return e;
-}
+    clock.setAttribute('n', size);
+    clock.style.setProperty('--n', size);
+    return clock;
+};
 
 // Adiciona uma linha vazia ao painel.
-let add_row = function(root) {
-    return d.row({}, root).appendTo(root.find('.rows'));
-}
+const addRow = function(root) {
+    const row = createRow({}, root);
+    root.querySelector('.rows').append(row);
+    return row;
+};
 
 // Cria um clock na linha indicada (ou na ultima linha) e reposiciona o controle
 // de adicao. max define o numero inicial de fatias; o padrao continua sendo 4.
-let add_clock = function({good=false, row=undefined, max=4, root=undefined}={}) {
-    root = root || (row ? row.closest('.clocks-app') : undefined);
-    row = row ? row : root.find('.row').last();
-    if (row.length == 0) {
-        row = add_row(root);
+const addClock = function({good = false, row, max = 4, root} = {}) {
+    root = root || row?.closest('.clocks-app');
+    row = row || root.querySelector('.row:last-of-type');
+    if (!row) {
+        row = addRow(root);
     }
-    let e = d.clock({good: good, max: max}).appendTo(row.find('.clocks'));
-    row.find('.spawner').insertAfter(e);
-    return e;
-}
+    const clock = createClock({good, max});
+    row.querySelector('.clocks').append(clock);
+    clock.after(row.querySelector('.spawner'));
+    return clock;
+};
 
 // Preenche as fatias ate o ponto clicado ou limpa a partir dele, mantendo
 // sempre o progresso como uma sequencia continua desde o inicio do clock.
-let click_clock = function(clock, event) {
-    let target = $(event.target);
-    if (!target.is('.slice')) {
+const clickClock = function(clock, event) {
+    const target = event.target;
+    if (!target.matches('.slice')) {
         return;
     }
-    let i = parseInt(target.attr('i'));
-    let filling = clock.find(`.slice[i="${i}"]`).attr('filled') == undefined;
-    clock.find('.slice').each((j, e) => {
-        if (j > i || (j == i && !filling)) {
-            $(e).removeAttr('filled');
+    const index = Number.parseInt(target.getAttribute('i'), 10);
+    const filling = !target.hasAttribute('filled');
+    clock.querySelectorAll('.slice').forEach((slice, sliceIndex) => {
+        if (sliceIndex > index || (sliceIndex === index && !filling)) {
+            slice.removeAttribute('filled');
         } else {
-            $(e).attr('filled', '');
+            slice.setAttribute('filled', '');
         }
     });
-    update_clock(clock, i, true);
-}
+    updateClockPreview(clock, index, true);
+};
 
 // Exibe a pre-visualizacao do preenchimento ao passar o mouse sobre uma fatia.
-let update_clock = function(clock, i, inside) {
+const updateClockPreview = function(clock, i, inside) {
     if (inside) {
-        let filling = clock.find(`.slice[i="${i}"]`).attr('filled') == undefined;
-        clock.find('.slice').each((j, e) => {
-            let slice = $(e);
-            let filled = slice.attr('filled') != undefined;
-            let change = filling ? 
-                j < i && !filled : 
-                j > i && filled;
-            if (change) {
-                slice.attr('will-change', '');
+        const filling = !clock.querySelector(`.slice[i="${i}"]`).hasAttribute('filled');
+        clock.querySelectorAll('.slice').forEach((slice, index) => {
+            const filled = slice.hasAttribute('filled');
+            const willChange = filling ? index < i && !filled : index > i && filled;
+            if (willChange) {
+                slice.setAttribute('will-change', '');
             } else {
-                slice.removeAttr('will-change');
+                slice.removeAttribute('will-change');
             }
         });
     } else {
-        clock.find('.slice').removeAttr('will-change');
+        clock.querySelectorAll('.slice').forEach(slice => slice.removeAttribute('will-change'));
     }
-}
+};
 
 // Redimensiona o clock com Shift+scroll; o progresso existente e preservado.
-let scale_clock = function(clock, event) {
+const scaleClock = function(clock, event) {
     if (!event.shiftKey) {
         return;
     }
     event.preventDefault();
-    // event.stopPropagation();
-    let size = parseInt(clock.attr('n'));
-    let modifier = event.originalEvent.deltaY > 0 ? -INC : INC;
+    let size = Number.parseInt(clock.getAttribute('n'), 10);
+    let modifier = event.deltaY > 0 ? -INC : INC;
     if (size == MIN && modifier > 0) {
         modifier = 1; // Special sauce to allow MIN=3 but INC=2
     }
     let n = Math.max(MIN, size + modifier);
     if (n != size) {
-        d.clock.populate(clock, n);
+        populateClock(clock, n);
     }
-}
+    };
 
 // Alterna a cor do clock entre bom (azul) e ruim (laranja) com Shift+clique.
-let toggle_clock = function(clock, event) {
+const toggleClock = function(clock, event) {
     if (!event.shiftKey) {
         return;
     }
-    if (clock.attr('good') == undefined) {
-        clock.removeAttr('bad');
-        clock.attr('good', '');
+    if (!clock.hasAttribute('good')) {
+        clock.removeAttribute('bad');
+        clock.setAttribute('good', '');
     } else {
-        clock.removeAttr('good');
-        clock.attr('bad', '');
+        clock.removeAttribute('good');
+        clock.setAttribute('bad', '');
     }
-}
+};
 
 // Remove o clock associado ao puxador com duplo clique, exceto se Shift estiver
 // pressionado, gesto reservado para alternar a cor.
-let remove_clock = function(clock, event, force=false) {
+const removeClock = function(clock, event, force = false) {
     if (!force && event.shiftKey) {
         return;
     }
     clock.remove();
-}
+};
 
 // Abre ou fecha a ajuda contextual com os gestos disponiveis na interface.
-let help = function(root) {
-    let e = root.find('.help-info');
-    if (e.length) {
-        e.remove();
-    } else {
-        e = d('help-info', 
-            d('text').html('<b>Clique</b> nas fatias do relógio para preencher ou limpar.'),
-            d('text').html('<b>Shift + rolagem</b> sobre um relógio para redimensioná-lo.'),
-            d('text').html('<b>Arraste</b> o relógio ou a linha pela barra lateral.'),
-            d('text').html('<b>Clique em ×</b> para remover um relógio; duplo clique na barra remove uma linha.'),
-            d('text').html('<b>Shift + clique</b> na barra para alternar a cor do relógio.'),
-            d('text').html('<b>Shift + clique</b> na barra da linha para recolhê-la ou expandi-la.'),
-        ).appendTo(root);
-        e.get(0).style.setProperty('--w', `${e.width()}px`);
-        e.one('click', event => e.remove());
+const toggleHelp = function(root) {
+    const existingHelp = root.querySelector('.help-info');
+    if (existingHelp) {
+        existingHelp.remove();
+        return;
     }
-}
+
+    const help = createElement('help-info',
+        createHelpText('Clique', ' nas fatias do relógio para preencher ou limpar.'),
+        createHelpText('Shift + rolagem', ' sobre um relógio para redimensioná-lo.'),
+        createHelpText('Arraste', ' o relógio ou a linha pela barra lateral.'),
+        createHelpText('Clique em ×', ' para remover um relógio; duplo clique na barra remove uma linha.'),
+        createHelpText('Shift + clique', ' na barra para alternar a cor do relógio.'),
+        createHelpText('Shift + clique', ' na barra da linha para recolhê-la ou expandi-la.'),
+        );
+    root.append(help);
+    help.style.setProperty('--w', `${help.getBoundingClientRect().width}px`);
+    help.addEventListener('click', () => help.remove(), {once: true});
+};
 
 // Restaura do localStorage as linhas e clocks salvos, incluindo tamanho e
 // progresso de cada clock.
-let load = function(root, storageKey) {
-    let rows = root.find('.rows');
-    let data = JSON.parse(window.localStorage.getItem(storageKey) || '[]');
-    for (let row of data) {
-        d.row(row, root).appendTo(rows);
+const loadState = function(root, storageKey) {
+    const rows = root.querySelector('.rows');
+    const data = JSON.parse(window.localStorage.getItem(storageKey) || '[]');
+    for (const rowData of data) {
+        rows.append(createRow(rowData, root));
     }
-}
+};
 
 // Serializa o estado atual do DOM em JSON para manter o estado entre visitas.
-let save = function(root, storageKey) {
-    let data = root.find('.row')
-        .map((i, r) => ({
-            name: $(r).find('.name').val().trim(), 
-            clocks: $(r).find('.clock')
-                .map((j, c) => ({
-                    description: $(c).find('.description').val().trim(), 
-                    good: $(c).attr('good') != undefined, 
-                    max: parseInt($(c).attr('n')), 
-                    progress: $(c).find('[filled]').length, 
-                }))
-                .get(), 
-            minimized: $(r).is('[minimized]'), 
-        }))
-        .get();
+const saveState = function(root, storageKey) {
+    const data = Array.from(root.querySelectorAll('.row'), row => ({
+        name: row.querySelector('.name').value.trim(),
+        clocks: Array.from(row.querySelectorAll('.clock'), clock => ({
+            description: clock.querySelector('.description').value.trim(),
+            good: clock.hasAttribute('good'),
+            max: Number.parseInt(clock.getAttribute('n'), 10),
+            progress: clock.querySelectorAll('[filled]').length,
+        })),
+        minimized: row.hasAttribute('minimized'),
+    }));
     window.localStorage.setItem(storageKey, JSON.stringify(data));
-}
+};
 
 // Cria o painel, conecta os botoes, habilita ordenacao e configura carga/salva.
-let mountClocks = function(container, storageKey='bitd_heist_clocks') {
-    if (!container) {
+const mountClocks = function(container, storageKey = 'bitd_heist_clocks') {
+    const host = typeof container === 'string' ? document.querySelector(container) : container;
+    if (!host) {
         throw new Error('O container dos clocks nao foi encontrado.');
     }
-    let main = d('clocks-app',
-        d('menu', 
-            d('button new-row', 
-                d('text').text('Row'), 
-            ), 
-            d('button bad-clock', 
-                d('text').text('Clock (bad)'), 
-            ), 
-            d('button good-clock', 
-                d('text').text('Clock (good)'), 
-            ), 
-            d('button clock-six',
-                d('text').text('Clock (6)'),
+    const main = createElement('clocks-app',
+        createElement('menu',
+            createElement('button new-row',
+                createText('text', 'Row'),
             ),
-            d('button clock-eight',
-                d('text').text('Clock (8)'),
+            createElement('button bad-clock',
+                createText('text', 'Clock (bad)'),
             ),
-            d('button help', 
-                d('text').text('?'), 
-            ), 
-        ), 
-        d('rows'), 
-    ).appendTo($(container));
+            createElement('button good-clock',
+                createText('text', 'Clock (good)'),
+            ),
+            createElement('button clock-six',
+                createText('text', 'Clock (6)'),
+            ),
+            createElement('button clock-eight',
+                createText('text', 'Clock (8)'),
+            ),
+            createElement('button help',
+                createText('text', '?'),
+            ),
+        ),
+        createElement('rows'),
+    );
+    host.append(main);
 
-    main.find('.new-row').on('click', e => add_row(main));
-    main.find('.bad-clock').on('click', e => add_clock({root: main}));
-    main.find('.good-clock').on('click', e => add_clock({good: true, root: main}));
-    main.find('.clock-six').on('click', e => add_clock({max: 6, root: main}));
-    main.find('.clock-eight').on('click', e => add_clock({max: 8, root: main}));
-    main.find('.help').on('click', e => help(main));
+    main.querySelector('.new-row').addEventListener('click', () => addRow(main));
+    main.querySelector('.bad-clock').addEventListener('click', () => addClock({root: main}));
+    main.querySelector('.good-clock').addEventListener('click', () => addClock({good: true, root: main}));
+    main.querySelector('.clock-six').addEventListener('click', () => addClock({max: 6, root: main}));
+    main.querySelector('.clock-eight').addEventListener('click', () => addClock({max: 8, root: main}));
+    main.querySelector('.help').addEventListener('click', () => toggleHelp(main));
 
-    Sortable.create(main.find('.rows').get(0), {
+    Sortable.create(main.querySelector('.rows'), {
         handle: '.row-handle',
-        animation: 150, 
-        ghostClass: 'dragged-item', 
+        animation: 150,
+        ghostClass: 'dragged-item',
     });
 
-    window.addEventListener('beforeunload', () => save(main, storageKey));
-    load(main, storageKey);
+    window.addEventListener('beforeunload', () => saveState(main, storageKey));
+    loadState(main, storageKey);
     return {
-        element: main.get(0),
+        element: main,
         getState: () => {
-            save(main, storageKey);
+            saveState(main, storageKey);
             return JSON.parse(window.localStorage.getItem(storageKey) || '[]');
         },
         setState: state => {
-            main.find('.rows').empty();
+            main.querySelector('.rows').replaceChildren();
             window.localStorage.setItem(storageKey, JSON.stringify(Array.isArray(state) ? state : []));
-            load(main, storageKey);
+            loadState(main, storageKey);
         },
         clear: () => {
-            main.find('.rows').empty();
+            main.querySelector('.rows').replaceChildren();
             window.localStorage.removeItem(storageKey);
         },
     };
-}
+};
 
 export {mountClocks};
