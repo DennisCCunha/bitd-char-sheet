@@ -37,19 +37,51 @@ const createHelpText = function(emphasis, description) {
     return createElement('text', emphasizedText, document.createTextNode(description));
 };
 
+const createClockControls = function(row, root) {
+    const options = [
+        {size: 4, good: false},
+        {size: 4, good: true},
+        {size: 6, good: false},
+        {size: 6, good: true},
+        {size: 8, good: false},
+        {size: 8, good: true},
+    ];
+    const controls = createElement('clock-controls');
+
+    for (const option of options) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `clock-add ${option.good ? 'good' : 'bad'}`;
+        button.textContent = `${option.size} passos`;
+        button.setAttribute('aria-label', `Adicionar relógio ${option.good ? 'bom' : 'ruim'} de ${option.size} passos`);
+        button.addEventListener('click', () => addClock({
+            good: option.good,
+            max: option.size,
+            row,
+            root,
+        }));
+        controls.append(button);
+    }
+
+    return controls;
+};
+
 // Monta uma linha com nome, clocks e controles; Sortable permite reordenar
 // clocks e linhas, enquanto os gestos no puxador recolhem ou removem a linha.
 const createRow = function({name = '', clocks = [], minimized = false} = {}, root) {
     const row = createElement('row',
         createElement('handle row-handle'),
         createElement('inner',
-            Object.assign(createInput('name', {placeholder: 'Row'}), {value: name}),
+            createElement('row-header',
+                Object.assign(createInput('name', {placeholder: 'Row'}), {value: name}),
+            ),
             createElement('clocks',
                 ...clocks.map(createClock),
                 createSpawner(),
             ),
         ),
     );
+    row.querySelector('.row-header').append(createClockControls(row, root));
     if (minimized) {
         row.setAttribute('minimized', '');
     }
@@ -325,18 +357,6 @@ const mountClocks = function(container, storageKey = 'bitd_heist_clocks') {
             createElement('button new-row',
                 createText('text', 'Row'),
             ),
-            createElement('button bad-clock',
-                createText('text', 'Clock (bad)'),
-            ),
-            createElement('button good-clock',
-                createText('text', 'Clock (good)'),
-            ),
-            createElement('button clock-six',
-                createText('text', 'Clock (6)'),
-            ),
-            createElement('button clock-eight',
-                createText('text', 'Clock (8)'),
-            ),
             createElement('button help',
                 createText('text', '?'),
             ),
@@ -346,10 +366,6 @@ const mountClocks = function(container, storageKey = 'bitd_heist_clocks') {
     host.append(main);
 
     main.querySelector('.new-row').addEventListener('click', () => addRow(main));
-    main.querySelector('.bad-clock').addEventListener('click', () => addClock({root: main}));
-    main.querySelector('.good-clock').addEventListener('click', () => addClock({good: true, root: main}));
-    main.querySelector('.clock-six').addEventListener('click', () => addClock({max: 6, root: main}));
-    main.querySelector('.clock-eight').addEventListener('click', () => addClock({max: 8, root: main}));
     main.querySelector('.help').addEventListener('click', () => toggleHelp(main));
 
     Sortable.create(main.querySelector('.rows'), {

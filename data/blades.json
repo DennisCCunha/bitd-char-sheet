@@ -494,8 +494,16 @@
             {"id":2004035, "tipo":"Sombras", "nome":"Fitz, colecionador"},
             {"id":2004036, "tipo":"Sombras", "nome":"Adelaide Phroaig, nobre"},
             {"id":2004037, "tipo":"Sombras", "nome":"Rigney, dono de taverna"}
-        ]
+        ],
 
+        "territorio-prisao":[
+            {"nome":"casca-grossa", "descricao":"A sua fama como detento feroz alimenta a reputação do seu bando em Doskvol. O custo de desenvolvimento do seu bando diminui em 2 moedas."},
+            {"nome":"controle do pavilhão", "descricao":"O seu bando controla completamente um pavilhão, incluindo os guardas. Você nunca sofre trauma na prisão."},
+            {"nome":"liberdade condicional", "descricao":"O seu bando exerce algum tipo de influência política sobre o diretor da prisão e alguns juízes, forçando-os a reconsiderar a duração das suas sentenças. Reduza em um o nível de procurado do bando para determinar a duração das sentenças de seus membros. Dessa forma, um membro de um bando com nível de procurado 3 passa apenas alguns meses atrás das grades (o equivalente ao nível 2) ao invés de um ano inteiro"},
+            {"nome":"posse aliada","descricao":"A facção de um colega prisioneiro faz uma concessão para o bando. Receba uma posse de um tipo de bando diferente (qualquer uma, exceto os territórios)."},
+            {"nome":"suborno dos carcereiros", "descricao":"O seu bando tem nomes de vários guardas da prisão na folha de pagamento. Seus membros adicionam +1d na rolagem de prisão."},
+            {"nome":"tráfico interno", "descricao":"O bando organiza vias de tráfico para dentro da prisão. Vocês possuem +2 de carga na prisão (prisioneiros normalmente possuem 0 de carga). Essa posse pode ser adquirida duas vezes, fornecendo um total de 4 de carga para os membros do bando que estejam na prisão. Além disso, eles podem carregar moedas como carga para usar como suborno, ou adquirir recursos na prisão. Os prisioneiros podem alterar os itens na sua carga durante a folga do bando, através de visitas e canais de tráfico."}
+        ]
     },
 
     "heist": {
@@ -513,8 +521,68 @@
         "cidades": [
             {"nome":"Doskvol", "descricao":"Descrição da cidade exemplo."}
         ],
-        "faccções": [
-            {"natureza":"Exemplo", "nome":"Facção Exemplo", "categoria":"Categoria Exemplo", "descricao":"Descrição da facção exemplo."}
+        "faccoes": [
+            {"regiao":"SUBMNUNDO", "nome":"A Colméia", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Velados", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"O Círculo das Chamas", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Lorde Scurlock", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Cravos de Prata", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Cutelos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Corvos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"As Irmãs Funestas", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Casacas Cinzas", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Trituradores", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Lanternas Negras", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Faixas Escarlates", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Vultos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Os Mastins da Névoa", "categoria":"i", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Almas Perdidas", "categoria":"i", "controle":"Precário"},
+            {"regiao":"SUBMNUNDO", "nome":"Ulf Filho do Ferro", "categoria":"i", "controle":"Forte"},
+
+            {"regiao":"INSTITUIÇÕES", "nome":"Exército Imperial", "categoria":"vi", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Conselho Municipal", "categoria":"v", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Caçadores de Leviatãs", "categoria":"v", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Ministério da Preservação", "categoria":"v", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Prisão Anzolférreo", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Faisqueiros", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Patrulheiros Espirituais", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Casacas Azuis", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Inspetores", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Consulado Iruviano", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Consulado Skovlandês", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"INSTITUIÇÕES", "nome":"A Brigada", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Consulado do Arquipélago das Adagas", "categoria":"i", "controle":"Forte"},
+            {"regiao":"INSTITUIÇÕES", "nome":"Consulado Severosi", "categoria":"i", "controle":"Forte"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"A Fundação", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Estivadores", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Gondoleiros", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Trabalhadores", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Marujos", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Cocheiros", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Cifras", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Libertintos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Peões dos Trilhos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Servos", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"CIDADANIA", "nome":"Coroa-Alva", "categoria":"v", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Diamantina", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Câmara Oficial", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Seis Torres", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"CIDADANIA", "nome":"Praia da Seda", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Empório Noturno", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Pé-de-Corvo", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"As Docas", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Morro do Rio", "categoria":"ii", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Morro do Carvão", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"CIDADANIA", "nome":"Baixada do Borralho", "categoria":"i", "controle":"Forte"},
+            {"regiao":"CIDADANIA", "nome":"Charco-Gris", "categoria":"i", "controle":"Precário"},
+            {"regiao":"PERIFERIA", "nome":"A Igreja do Êxtase", "categoria":"iv", "controle":"Forte"},
+            {"regiao":"PERIFERIA", "nome":"Os Deuses Esquecidos", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"PERIFERIA", "nome":"A Horda", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"PERIFERIA", "nome":"A Via dos Ecos", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"PERIFERIA", "nome":"Os Reconciliados", "categoria":"iii", "controle":"Forte"},
+            {"regiao":"PERIFERIA", "nome":"Refugiados Skovlandeses", "categoria":"iii", "controle":"Precário"},
+            {"regiao":"PERIFERIA", "nome":"Legião da Morte", "categoria":"ii", "controle":"Precário"},
+            {"regiao":"PERIFERIA", "nome":"A Dama Lacrimosa", "categoria":"ii", "controle":"Precário"}
         ]
     }
 

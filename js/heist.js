@@ -213,7 +213,7 @@ class HeistSheet {
 
       const remove = document.createElement('button');
       remove.type = 'button';
-      remove.textContent = 'Remover';
+      remove.textContent = 'x';
       remove.dataset.removeFaction = index;
       remove.setAttribute('aria-label', `Remover facção ${index + 1}`);
 

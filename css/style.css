@@ -961,8 +961,7 @@ input:focus + label {
 }
 
 .heist-faction-row {
-    display: grid;
-    grid-template-columns: minmax(8rem, 1fr) minmax(12rem, 2fr) auto;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0;
@@ -982,8 +981,21 @@ input:focus + label {
 }
 
 .heist-faction-row button {
-    white-space: nowrap;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        background-color: var(--black);        
+        color: var(--white);
+        border: 2px solid var(--focus);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        padding: 0.5rem 1rem;
 }
+.heist-faction-row button:hover{
+        background-color: var(--light);
+        color: var(--black);
+    }
+
+
 
 .heist-empty-state {
     margin: 0;

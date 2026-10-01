@@ -217,10 +217,13 @@ class CharacterSheet {
     }
 
     #onPlaybookChange(e) {
+        console.log(e.target.value);
         this.character.playbook = e.target.value;
-        this.loadplaybookMoves();
-        this.loadplaybookContacts();
-        this.loadItens();
+        
+        this.loadplaybookMoves(this.character.playbook);
+        this.loadplaybookContacts(this.character.playbook);
+        this.loadItens(this.character.playbook);
+
         this.updateCharacterFromDOM();
         this.save();
     }
@@ -287,11 +290,12 @@ class CharacterSheet {
         setVal('input-historia', character.historia);
         setVal('input-vicios', character.vicios);
 
-        if (character.playbook) {
+        if (character.playbook !== undefined && character.playbook !== null && character.playbook !== '') {
             setVal('playbookSelector', character.playbook);
-            this.loadplaybookMoves();
-            this.loadplaybookContacts();
-            this.loadItens();
+
+            this.loadplaybookMoves(character.playbook);
+            this.loadplaybookContacts(character.playbook);
+            this.loadItens(character.playbook);
         }
 
         if (character.inputs) {
@@ -334,9 +338,9 @@ class CharacterSheet {
         SaveAndLoad.clearState();
         this.character = new Character(); // reset model first
         this.clearInputs();
-        this.loadplaybookMoves();
-        this.loadItens();
-        this.loadplaybookContacts();
+        this.loadplaybookMoves(this.character.playbook);
+        this.loadItens(this.character.playbook);
+        this.loadplaybookContacts(this.character.playbook);
         const pageTitle = document.getElementById('pageTitle');
         if (pageTitle) {
             pageTitle.textContent = 'Blades in the Dark - Ficha de personagem';
@@ -358,11 +362,11 @@ class CharacterSheet {
         });
     }
 
-    loadplaybookMoves() {
+    loadplaybookMoves(playbook) {
         const movementContainer = document.getElementById('movementContainer');
         if (!movementContainer) return;
         movementContainer.innerHTML = '';
-        const plabookmoves = this.ruleset.habilidades.filter( move => move.playbook === this.character.playbook || move.playbook === "Comum" );
+        const plabookmoves = this.ruleset.habilidades.filter( move => move.playbook === playbook || move.playbook === "Comum" );
 
         plabookmoves.forEach((move) => {
             const box = document.createElement('div');
@@ -399,27 +403,20 @@ class CharacterSheet {
         });
     }
 
-    loadplaybookContacts(){
+    loadplaybookContacts(playbook){
+        if (!playbook) return;
         const contactsContainer = document.getElementById('amigosContainer');
         if (!contactsContainer) return;
         contactsContainer.innerHTML = '';
         
-        let contatos = null;
-        let labelText = '';
-
-        this.ruleset.playbook.forEach((playbook) => {
-            if (playbook.nome === this.character.playbook) {
-                labelText = playbook['contatos-label'];
-                contatos = playbook.contatos;
-            }
-        });
+        const pb = this.ruleset.playbook.find(pb => pb.nome === playbook);
 
         const label = document.createElement('span');
-        label.textContent = labelText;
+        label.textContent = pb["contatos-label"];
         label.classList.add('contact-label');
         contactsContainer.appendChild(label);
 
-        contatos.forEach((amigo, index) => {
+        pb.contatos.forEach((amigo, index) => {
             const box = document.createElement('div');
             box.classList.add('contact-box');
 
@@ -458,14 +455,15 @@ class CharacterSheet {
         });
     }
 
-    loadItens() {
+    loadItens(playbook) {
+        if (!playbook) return;
+        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
+        const playbookItens = this.ruleset.itens.filter(item => item.playbook === playbook);
+
         const itensContainer = document.getElementById('itensContainer');
         if (!itensContainer) return;
 
-        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
-        const playbookItens = this.ruleset.itens.filter(item => item.playbook === this.character.playbook);
-
-        itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + this.character.playbook));
+        itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + playbook));
         itensContainer.appendChild(this.renderItensBlock(commonItens, 'Itens Comuns'));
     }
 
