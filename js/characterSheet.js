@@ -1,4 +1,3 @@
-
 import ruleset from "../data/blades.json" with { type: "json" };
 import SaveAndLoad from './saveAndLoad.js';
 import Character from './character.js';
@@ -6,7 +5,7 @@ import Modal from './modal.js';
 import Banner from '../banner/banner.js';
 
 
-class Scoundrel {
+class CharacterSheet {
 
     constructor() {
         document.addEventListener('DOMContentLoaded', () => {
@@ -16,6 +15,8 @@ class Scoundrel {
         });
     }
 
+    // ─── Initialisation ───────────────────────────────────────────────────────
+
     #init() {
         this.ruleset = ruleset;
         this.character = new Character();
@@ -23,8 +24,24 @@ class Scoundrel {
 
         this.#registerModals();
         this.#registerEvents();
-    
+        this.#saveAndLoadButtons();
         this.#startup();
+    }
+
+    #saveAndLoadButtons() {
+        const nav = document.getElementById('site-nav');
+        const container = document.createElement('div');
+        container.className = 'save_buttons';
+        container.innerHTML = `
+          <button id="btnGerarCodigo">Salvar ficha</button>
+          <button id="btnRestaurar">Restaurar ficha</button>
+          <button id="btnLimpar">Limpar ficha</button>
+        `;
+        nav.appendChild(container);
+
+        document.getElementById('btnGerarCodigo')?.addEventListener('click', () => this.#openCodeModal());
+        document.getElementById('btnRestaurar')?.addEventListener('click', () => this.#openRestoreModal());
+        document.getElementById('btnLimpar')?.addEventListener('click', () => this.modal.open('clearModal'));
     }
 
     /** Ensures every input and XP circle has a stable ID for save/load. */
@@ -38,12 +55,12 @@ class Scoundrel {
     #startup() {
         this.stressBanners();
         this.traumaBanners();
+        this.playbookBanners();
         this.actionContainerRender();
         this.playbookSelection();
         this.#assignMissingIds();
         this.load();
         this.#updateName();
-
         console.log('Ficha iniciada com sucesso.');
     }
 
@@ -75,7 +92,7 @@ class Scoundrel {
         this.#createCodeModal();
         this.#createRestoreModal();
         this.#createClearModal();
-        this.#createMovementModal();
+        //this.#createMovementModal();
     }
 
     #createCodeModal() {
@@ -128,26 +145,26 @@ class Scoundrel {
         });
     }
 
-    #createMovementModal() {
-        const body = document.createElement('div');
-        body.innerHTML = `
-            <p>Selecione os movimentos para o seu personagem.</p>
-            <select id="movementClassSelect">
-                <option value="">Selecione a classe</option>
-            </select>
-            <section id="movementModalContainer" class="movement-available"></section>
-        `;
-        this.modal.create({
-            id: 'movementModal',
-            title: 'Movimentos',
-            body,
-            closable: false,
-            buttons: [
-                { label: 'Confirmar' },
-                { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
-            ],
-        });
-    }
+    // #createMovementModal() {
+    //     const body = document.createElement('div');
+    //     body.innerHTML = `
+    //         <p>Selecione os movimentos para o seu personagem.</p>
+    //         <select id="movementClassSelect">
+    //             <option value="">Selecione a classe</option>
+    //         </select>
+    //         <section id="movementModalContainer" class="movement-available"></section>
+    //     `;
+    //     this.modal.create({
+    //         id: 'movementModal',
+    //         title: 'Movimentos',
+    //         body,
+    //         closable: false,
+    //         buttons: [
+    //             { label: 'Confirmar' },
+    //             { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
+    //         ],
+    //     });
+    // }
 
     #openCodeModal() {
         this.updateCharacterFromDOM();
@@ -183,6 +200,8 @@ class Scoundrel {
         }
     }
 
+    // ─── Name Handling ─────────────────────────────────────────────────────────
+
     #updateName(){
         const inputNome = document.getElementById('input-nome');
         if (inputNome) {
@@ -197,10 +216,13 @@ class Scoundrel {
     }
 
     #onPlaybookChange(e) {
+        console.log(e.target.value);
         this.character.playbook = e.target.value;
-        this.loadplaybookMoves();
-        this.loadplaybookContacts();
-        this.loadItens();
+        
+        this.loadplaybookMoves(this.character.playbook);
+        this.loadplaybookContacts(this.character.playbook);
+        this.loadItens(this.character.playbook);
+
         this.updateCharacterFromDOM();
         this.save();
     }
@@ -208,10 +230,10 @@ class Scoundrel {
 
     // ─── Persistence ─────────────────────────────────────────────────────────
 
-    save() { SaveAndLoad.autoSave(this.character); }
+    save() { SaveAndLoad.autoSave(Character, this.character); }
 
     load() {
-        const saved = SaveAndLoad.autoLoad();
+        const saved = SaveAndLoad.autoLoad(Character);
         if (saved) {
             this.character = saved;
             this.populateDOM(this.character);
@@ -267,11 +289,12 @@ class Scoundrel {
         setVal('input-historia', character.historia);
         setVal('input-vicios', character.vicios);
 
-        if (character.playbook) {
+        if (character.playbook !== undefined && character.playbook !== null && character.playbook !== '') {
             setVal('playbookSelector', character.playbook);
-            this.loadplaybookMoves();
-            this.loadplaybookContacts();
-            this.loadItens();
+
+            this.loadplaybookMoves(character.playbook);
+            this.loadplaybookContacts(character.playbook);
+            this.loadItens(character.playbook);
         }
 
         if (character.inputs) {
@@ -314,9 +337,9 @@ class Scoundrel {
         SaveAndLoad.clearState();
         this.character = new Character(); // reset model first
         this.clearInputs();
-        this.loadplaybookMoves();
-        this.loadItens();
-        this.loadplaybookContacts();
+        this.loadplaybookMoves(this.character.playbook);
+        this.loadItens(this.character.playbook);
+        this.loadplaybookContacts(this.character.playbook);
         const pageTitle = document.getElementById('pageTitle');
         if (pageTitle) {
             pageTitle.textContent = 'Blades in the Dark - Ficha de personagem';
@@ -338,11 +361,11 @@ class Scoundrel {
         });
     }
 
-    loadplaybookMoves() {
+    loadplaybookMoves(playbook) {
         const movementContainer = document.getElementById('movementContainer');
         if (!movementContainer) return;
         movementContainer.innerHTML = '';
-        const plabookmoves = this.ruleset.habilidades.filter( move => move.playbook === this.character.playbook || move.playbook === "Comum" );
+        const plabookmoves = this.ruleset.habilidades.filter( move => move.playbook === playbook || move.playbook === "Comum" );
 
         plabookmoves.forEach((move) => {
             const box = document.createElement('div');
@@ -379,27 +402,20 @@ class Scoundrel {
         });
     }
 
-    loadplaybookContacts(){
+    loadplaybookContacts(playbook){
+        if (!playbook) return;
         const contactsContainer = document.getElementById('amigosContainer');
         if (!contactsContainer) return;
         contactsContainer.innerHTML = '';
         
-        let contatos = null;
-        let labelText = '';
-
-        this.ruleset.playbook.forEach((playbook) => {
-            if (playbook.nome === this.character.playbook) {
-                labelText = playbook['contatos-label'];
-                contatos = playbook.contatos;
-            }
-        });
+        const pb = this.ruleset.playbook.find(pb => pb.nome === playbook);
 
         const label = document.createElement('span');
-        label.textContent = labelText;
+        label.textContent = pb["contatos-label"];
         label.classList.add('contact-label');
         contactsContainer.appendChild(label);
 
-        contatos.forEach((amigo, index) => {
+        pb.contatos.forEach((amigo, index) => {
             const box = document.createElement('div');
             box.classList.add('contact-box');
 
@@ -438,14 +454,15 @@ class Scoundrel {
         });
     }
 
-    loadItens() {
+    loadItens(playbook) {
+        if (!playbook) return;
+        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
+        const playbookItens = this.ruleset.itens.filter(item => item.playbook === playbook);
+
         const itensContainer = document.getElementById('itensContainer');
         if (!itensContainer) return;
 
-        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
-        const playbookItens = this.ruleset.itens.filter(item => item.playbook === this.character.playbook);
-
-        itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + this.character.playbook));
+        itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + playbook));
         itensContainer.appendChild(this.renderItensBlock(commonItens, 'Itens Comuns'));
     }
 
@@ -600,18 +617,6 @@ class Scoundrel {
         }
         return actionList;
     }
-
 }
 
-function devIcon() {
-    if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") {
-        const favicon = document.querySelector("link[rel='icon']");
-        if (favicon) {
-            favicon.setAttribute("href", "./assets/dev-favicon.png");
-            console.log("Dev icon set for localhost.");
-        }
-    }
-}
-
-devIcon();
-const sheet = new Scoundrel();
+export default CharacterSheet;
