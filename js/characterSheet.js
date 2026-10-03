@@ -33,9 +33,9 @@ class CharacterSheet {
         const container = document.createElement('div');
         container.className = 'save_buttons';
         container.innerHTML = `
-          <button id="btnGerarCodigo">Salvar ficha</button>
-          <button id="btnRestaurar">Restaurar ficha</button>
-          <button id="btnLimpar">Limpar ficha</button>
+          <button id="btnGerarCodigo" class="nav-button">Salvar ficha</button>
+          <button id="btnRestaurar" class="nav-button">Restaurar ficha</button>
+          <button id="btnLimpar" class="nav-button">Limpar ficha</button>
         `;
         nav.appendChild(container);
 
@@ -87,7 +87,6 @@ class CharacterSheet {
 
 
     // ─── Modal setup ───────────────────────────────────────────────────────────
-
     #registerModals() {
         this.#createCodeModal();
         this.#createRestoreModal();
@@ -145,26 +144,26 @@ class CharacterSheet {
         });
     }
 
-    // #createMovementModal() {
-    //     const body = document.createElement('div');
-    //     body.innerHTML = `
-    //         <p>Selecione os movimentos para o seu personagem.</p>
-    //         <select id="movementClassSelect">
-    //             <option value="">Selecione a classe</option>
-    //         </select>
-    //         <section id="movementModalContainer" class="movement-available"></section>
-    //     `;
-    //     this.modal.create({
-    //         id: 'movementModal',
-    //         title: 'Movimentos',
-    //         body,
-    //         closable: false,
-    //         buttons: [
-    //             { label: 'Confirmar' },
-    //             { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
-    //         ],
-    //     });
-    // }
+    #createMovementModal() {
+        const body = document.createElement('div');
+        body.innerHTML = `
+            <p>Selecione os movimentos para o seu personagem.</p>
+            <select id="movementClassSelect">
+                <option value="">Selecione a classe</option>
+            </select>
+            <section id="movementModalContainer" class="movement-available"></section>
+        `;
+        this.modal.create({
+            id: 'movementModal',
+            title: 'Movimentos',
+            body,
+            closable: false,
+            buttons: [
+                { label: 'Confirmar' },
+                { label: 'Cancelar', className: 'secondary', onClick: () => { document.getElementById('movement').checked = false; } },
+            ],
+        });
+    }
 
     #openCodeModal() {
         this.updateCharacterFromDOM();
@@ -556,7 +555,7 @@ class CharacterSheet {
 
         const abilitybannerContainer = document.createElement('div');
         abilitybannerContainer.id = `${key}_abilitybannerContainer`;
-        abilitybannerContainer.className = 'bannerContainer';
+        abilitybannerContainer.className = 'bannerHeaderContainer';
 
         const abilityBannerLabel = document.createElement('span');
         abilityBannerLabel.className = 'header-label';

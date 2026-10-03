@@ -1,3 +1,10 @@
+
+
+/**
+ * SaveAndLoad is a utility class for encoding, decoding, saving, and loading
+ * character state to and from localStorage. It provides methods for handling
+ * both singular character data and general key-value storage.
+ */
 export default class SaveAndLoad {
     static KEY = 'DungeonWorld2024';
     static CHARACTER_KEY = 'dw_sheet_code';
@@ -82,4 +89,7 @@ export default class SaveAndLoad {
         } catch (e) { /* silent */ }
     }
 
+    static allLocalStorage() {
+        return Object.fromEntries(Object.entries(localStorage));
+    }
 }
