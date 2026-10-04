@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/assets/favicon.png" />
     <link rel="stylesheet" href="./css/style.css" />    
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet" />
     <link rel="manifest" href="./manifest.json" />
 
-    <script type="module" src="./js/layout.js" defer></script>
     <script type="module" src="./js/script.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js" defer></script>
         <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
     <script>
@@ -86,19 +83,22 @@
           </div>
           <div id="cureContainer">
             <span class="header-label">Cura</span>
-            <div class="cure-box">
-              <input type="checkbox" id="cure-1" class="cure">
-              <input type="checkbox" id="cure-2" class="cure">
-              <input type="checkbox" id="cure-3" class="cure">
-              <input type="checkbox" id="cure-4" class="cure">
+            <div class="cure-clock-box">
+                <span class="">Relógio de Cura</span>
+                <div class="cure-clock">
+                  <input type="checkbox" id="cure-1" class="action-checkbox">
+                  <input type="checkbox" id="cure-2" class="action-checkbox">
+                  <input type="checkbox" id="cure-3" class="action-checkbox">
+                  <input type="checkbox" id="cure-4" class="action-checkbox">
+                </div>
             </div>
           </div>
           <div id="armorContainer">
             <span class="header-label">Armadura</span>
             <div class="armor-box">
-              <label for="armor-1">Armadura</label><input type="checkbox" id="armor-1" class="armor">
-              <label for="armor-2">Pesada</label><input type="checkbox" id="armor-2" class="armor">
-              <label for="armor-3">Especial</label><input type="checkbox" id="armor-3" class="armor">
+              <div class="armor-item"><label for="armor-1">Armadura</label><input type="checkbox" id="armor-1" class="action-checkbox"></div>
+              <div class="armor-item"><label for="armor-2">Pesada</label><input type="checkbox" id="armor-2" class="action-checkbox"></div>
+              <div class="armor-item"><label for="armor-3">Especial</label><input type="checkbox" id="armor-3" class="action-checkbox"></div>
             </div>
           </div>
         </section>
@@ -112,8 +112,9 @@
       <article id="art-playbook">
         <section id="playbookMovesContainer" class="section-playbook-moves">
           <div id="playbook-header-selector" class="playbook-header-selector">
+            <label for="playbookSelector" class="header-label">Cartilha</label>
             <select id="playbookSelector" class="playbook-selector">
-                <option value="">Selecione o playbook</option>
+                <option value="">Selecione uma Cartilha</option>
             </select>
             <div id="playbookContainer" class="bannerContainer"></div>
           </div>

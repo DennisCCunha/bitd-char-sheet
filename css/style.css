@@ -77,7 +77,7 @@ main{
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: nowrap;
-    margin: 1rem;
+    margin: 1.2rem;
     gap: 1rem;
 }
 
@@ -322,6 +322,7 @@ input:focus + label {
     flex-direction: column;
     flex-wrap: nowrap;
     width: 100%;
+    margin-bottom: 1rem;
 
     .damage-header{
         padding-left: 0.5rem;
@@ -391,6 +392,64 @@ input:focus + label {
     }
 }
 
+#cureContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1rem;
+
+    .header-label{
+        width: 100%;
+    }
+    .cure-clock-box{
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+
+        span{
+            display: flex;
+            width: 100%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0 .5rem;
+        }
+    }
+}
+
+.cure-clock{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+
+#armorContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1rem;
+
+    .header-label{
+        width: 100%;
+    }
+
+    .armor-box{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+
+        .armor-item{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+        }
+    }
+}
+
+
+
+
 
 #art-playbook{
     display: flex;
@@ -428,42 +487,50 @@ input:focus + label {
     border-top: 3px solid var(--black);
     padding-bottom: 0.5rem;
     
+    .header-label{
+        width: 100%;
+    }
 
     .playbook-selector{
-    select, ::picker(select) {
-    appearance: base-select;
-    }
+        select, ::picker(select) {
+            appearance: base-select;
+        }
 
-    /* Style the button container */
-    select {
-    background-color: #1e1e1e;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    }
+        /* Style the button container */
+        select {
+            background-color: #1e1e1e;
+            color: white;
+            vertical-align: middle;
+            border-radius: 8px;
+            width: 100%;
+        }
 
-    /* Style the floating dropdown menu itself */
-    select::picker(select) {
-    background-color: #2d2d2d;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
+        /* Style the floating dropdown menu itself */
+        select::picker(select) {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
 
-    /* Style individual options */
-    option {
-    padding: 10px;
-    color: #ccc;
-    border-radius: 4px;
-    }
+        /* Style individual options */
+        option {
+            padding: 10px;
+            color: var(--black);
+            border-radius: 4px;
+        }
 
-    /* Style the hovered option */
-    option:hover {
-    background-color: #0066cc;
-    color: white;
+        /* Style the hovered option */
+        option:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .bannerContainer{
+            justify-content: space-around;
+        }
     }
-}
 }
 
 .movement-container{
@@ -531,7 +598,7 @@ input:focus + label {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         gap: .5rem;
     }

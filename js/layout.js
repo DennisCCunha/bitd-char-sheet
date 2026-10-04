@@ -1,9 +1,11 @@
 function loadLayout() {
   let nav = document.querySelector("#site-nav");
+
+
   let footer = document.querySelector("#site-footer");
-  let body = document.querySelector("body");
+
   
-  const navItems =  `
+  let navItems =  `
       <img src="./assets/blades-logo-red.png" class="logo" alt="Logo">
 
       <div class="nav-items">
@@ -13,7 +15,7 @@ function loadLayout() {
       </div>
     `;
 
-  const footerContent = `
+  let footerContent = `
       <p>
         Desenvolvido por
         <a href="https://github.com/DennisCCunha" target="_blank">
@@ -28,20 +30,7 @@ function loadLayout() {
       </p>
     `;
 
-  if (!nav) {
-    nav = document.createElement("nav");
-    nav.id = "site-nav";
-    nav.classList.add("floating-nav");
-    body.insertBefore(nav, body.firstChild);
-  }
- 
-  if (!footer) {
-    footer = document.createElement("footer");
-    footer.id = "site-footer";
-    body.appendChild(footer);
-  }
-
-  if (!nav.innerHTML) {
+  if (nav) {
     nav.innerHTML = navItems;
   }
 

@@ -8,11 +8,10 @@ import Banner from '../banner/banner.js';
 class CharacterSheet {
 
     constructor() {
-        document.addEventListener('DOMContentLoaded', () => {
-            this.#init();
-            this.SaveAndLoad = SaveAndLoad;
-            this.Character = new Character();
-        });
+        // Loaded via deferred module import: DOM is already ready.
+        this.#init();
+        this.SaveAndLoad = SaveAndLoad;
+        this.Character = new Character();
     }
 
     // ─── Initialisation ───────────────────────────────────────────────────────
@@ -402,12 +401,13 @@ class CharacterSheet {
     }
 
     loadplaybookContacts(playbook){
-        if (!playbook) return;
         const contactsContainer = document.getElementById('amigosContainer');
         if (!contactsContainer) return;
         contactsContainer.innerHTML = '';
+        if (!playbook) return;
         
         const pb = this.ruleset.playbook.find(pb => pb.nome === playbook);
+        if (!pb) return;
 
         const label = document.createElement('span');
         label.textContent = pb["contatos-label"];
@@ -454,12 +454,13 @@ class CharacterSheet {
     }
 
     loadItens(playbook) {
-        if (!playbook) return;
-        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
-        const playbookItens = this.ruleset.itens.filter(item => item.playbook === playbook);
-
         const itensContainer = document.getElementById('itensContainer');
         if (!itensContainer) return;
+        itensContainer.innerHTML = '';
+        if (!playbook) return;
+
+        const commonItens = this.ruleset.itens.filter(item => item.playbook === "Comum");
+        const playbookItens = this.ruleset.itens.filter(item => item.playbook === playbook);
 
         itensContainer.appendChild(this.renderItensBlock(playbookItens, 'Itens do ' + playbook));
         itensContainer.appendChild(this.renderItensBlock(commonItens, 'Itens Comuns'));
