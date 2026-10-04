@@ -67,18 +67,8 @@
     content: "+ ";
 }
 
-.clocks-app .menu .button.new-row .text::before,
-.clocks-app .menu .button.clock-six .text::before,
-.clocks-app .menu .button.clock-eight .text::before {
+.clocks-app .menu .button.new-row .text::before {
     color: var(--color-light);
-}
-
-.clocks-app .menu .button.bad-clock .text::before {
-    color: var(--color-orange);
-}
-
-.clocks-app .menu .button.good-clock .text::before {
-    color: var(--color-blue);
 }
 
 .clocks-app .menu .help .text {
@@ -116,10 +106,59 @@
     overflow-y: hidden;
 }
 
+.clocks-app .row-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: max-content;
+    min-width: 100%;
+    min-height: 2rem;
+}
+
 .clocks-app .row .name {
+    flex: 1 1 140px;
+    min-width: 90px;
     max-width: 100%;
     font-size: var(--font-size-row);
     color: var(--color-bright);
+}
+
+.clocks-app .clock-controls {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 0.2rem;
+}
+
+.clocks-app .clock-add {
+    padding: 0.35rem 0.55rem;
+    border: 0;
+    background: transparent;
+    color: var(--color-bright);
+    font-size: var(--font-size-button);
+    font-weight: bold;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.clocks-app .clock-add::before {
+    content: "+ ";
+}
+
+.clocks-app .clock-add.bad::before {
+    color: var(--color-orange);
+}
+
+.clocks-app .clock-add.good::before {
+    color: var(--color-blue);
+}
+
+.clocks-app .clock-add:hover {
+    background: var(--color-mid);
+}
+
+.clocks-app .clock-add:focus-visible {
+    outline: 2px solid var(--color-bright);
+    outline-offset: 2px;
 }
 
 .clocks-app .row .clocks {
@@ -387,6 +426,11 @@
     }
 
     .clocks-app .menu .button {
+        padding: 0.3rem;
+        font-size: 0.85rem;
+    }
+
+    .clocks-app .clock-add {
         padding: 0.3rem;
         font-size: 0.85rem;
     }

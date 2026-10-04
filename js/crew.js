@@ -1,6 +1,7 @@
 import ruleset from "../data/blades.json" with { type: "json" };
 import SaveAndLoad from './saveAndLoad.js';
 import Modal from './modal.js';
+import QuillEditor from './quillEditor.js';
 
 const STORAGE_KEY = 'bitd_crew_sheet';
 
@@ -54,6 +55,7 @@ class CrewSheet {
     this.#registerEvents();
     this.#renderStaticControls();
     this.#startup();
+    QuillEditor.enhanceTextarea('input-crew-notes');
   }
 
   #startup() {
@@ -396,6 +398,4 @@ class CrewSheet {
   }
 }
 
-export { Crew, CrewSheet };
-
-new CrewSheet();
+export default { Crew, CrewSheet };

@@ -2,6 +2,7 @@ import ruleset from '../data/blades.json' with { type: 'json' };
 import SaveAndLoad from './saveAndLoad.js';
 import Modal from './modal.js';
 import { mountClocks } from '../clocks/clocks.js';
+import QuillEditor from './quillEditor.js';
 
 const STORAGE_KEY = 'bitd_heist_sheet';
 
@@ -41,6 +42,7 @@ class HeistSheet {
     this.#registerStaticControls();
     this.#load();
     this.#render();
+    QuillEditor.enhanceTextarea('heist-notes');
   }
 
   #registerModals() {
@@ -213,7 +215,7 @@ class HeistSheet {
 
       const remove = document.createElement('button');
       remove.type = 'button';
-      remove.textContent = 'Remover';
+      remove.textContent = 'x';
       remove.dataset.removeFaction = index;
       remove.setAttribute('aria-label', `Remover facção ${index + 1}`);
 
@@ -289,4 +291,6 @@ class HeistSheet {
   }
 }
 
-new HeistSheet();
+
+export default {HeistSheet, Heist};
+

@@ -40,27 +40,6 @@ nav{
         height: 3rem;
         width: auto;
     }
-    a,
-    button{
-        text-decoration: none;
-        border-radius: 0.5rem;
-        background-color: var(--black);        
-        color: var(--white);
-        border: 2px solid var(--focus);
-        cursor: pointer;
-        transition: background-color 0.3s, color 0.3s;
-        padding: 0.5rem 1rem;
-    }
-    a:hover,
-    button:hover{
-        background-color: var(--light);
-        color: var(--black);
-    }
-
-    
-
-
-
 
 }
 
@@ -98,7 +77,8 @@ main{
     flex-direction: column;
     justify-content: space-between;
     flex-wrap: nowrap;
-    margin: 1rem;
+    margin: 1.2rem;
+    gap: 1rem;
 }
 
 article{
@@ -107,7 +87,23 @@ article{
     align-items: flex-start;
     flex-wrap: nowrap;
     gap: 1rem;
+    width: 100%;
 }
+
+.nav-button{
+    text-decoration: none;
+    border-radius: 0.5rem;
+    background-color: var(--black);        
+    color: var(--white);
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    padding: 0.5rem 1rem;
+}
+.nav-button:hover{
+    background-color: var(--light);
+    color: var(--black);
+}
+
 
 .input-field {
     position: relative;
@@ -278,6 +274,22 @@ input:focus + label {
 }
 
 
+.bannerHeaderContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    gap: .5rem;
+
+    border-top: 3px solid var(--black);
+
+    .header-label{
+        width: 100%;
+    }
+
+}
+
 .bannerContainer{
     display: flex;
     flex-direction: row;
@@ -285,25 +297,32 @@ input:focus + label {
     justify-content: space-between;
     box-sizing: border-box;
     gap: .5rem;
-    background-color: var(--muted);
-
+    
     & > * {
         transform: translateY(1px);
-        margin-right: auto;
-        margin-left: auto;
-    }   
+        /* margin-right: auto;
+        margin-left: auto; */
+    }
+
 
 }
+
+
 
 .section-condition{
     display: flex;
     flex-direction: column;
     margin-bottom: .5rem;
+    flex-wrap: nowrap;
+    width: 100%;
 }
 
 #damageContainer{
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    margin-bottom: 1rem;
 
     .damage-header{
         padding-left: 0.5rem;
@@ -351,6 +370,7 @@ input:focus + label {
             justify-content: justify;
             align-items: center;
             padding: 0 .5rem;
+            font-size: 0.75rem;
         }
         
         input{
@@ -372,11 +392,70 @@ input:focus + label {
     }
 }
 
+#cureContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1rem;
+
+    .header-label{
+        width: 100%;
+    }
+    .cure-clock-box{
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+
+        span{
+            display: flex;
+            width: 100%;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0 .5rem;
+        }
+    }
+}
+
+.cure-clock{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+}
+
+#armorContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    margin-bottom: 1rem;
+
+    .header-label{
+        width: 100%;
+    }
+
+    .armor-box{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+
+        .armor-item{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+        }
+    }
+}
+
+
+
+
 
 #art-playbook{
     display: flex;
     flex-direction: column;
     background-color: var(--muted);
+    width: 100%;
 
     
     .art-playbook-header{
@@ -392,47 +471,66 @@ input:focus + label {
     }
 }
 
+
+.section-playbook-moves{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+}
+
 .playbook-header-selector{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    border-top: 3px solid var(--black);
+    padding-bottom: 0.5rem;
+    
+    .header-label{
+        width: 100%;
+    }
 
     .playbook-selector{
-    select, ::picker(select) {
-    appearance: base-select;
-    }
+        select, ::picker(select) {
+            appearance: base-select;
+        }
 
-    /* Style the button container */
-    select {
-    background-color: #1e1e1e;
-    color: white;
-    padding: 12px;
-    border-radius: 8px;
-    }
+        /* Style the button container */
+        select {
+            background-color: #1e1e1e;
+            color: white;
+            vertical-align: middle;
+            border-radius: 8px;
+            width: 100%;
+        }
 
-    /* Style the floating dropdown menu itself */
-    select::picker(select) {
-    background-color: #2d2d2d;
-    border: 1px solid #444;
-    border-radius: 8px;
-    padding: 6px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    }
+        /* Style the floating dropdown menu itself */
+        select::picker(select) {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
 
-    /* Style individual options */
-    option {
-    padding: 10px;
-    color: #ccc;
-    border-radius: 4px;
-    }
+        /* Style individual options */
+        option {
+            padding: 10px;
+            color: var(--black);
+            border-radius: 4px;
+        }
 
-    /* Style the hovered option */
-    option:hover {
-    background-color: #0066cc;
-    color: white;
+        /* Style the hovered option */
+        option:hover {
+            background-color: red;
+            color: white;
+        }
+
+        .bannerContainer{
+            justify-content: space-around;
+        }
     }
-}
 }
 
 .movement-container{
@@ -453,6 +551,7 @@ input:focus + label {
             align-items: center;
             gap: .5rem;
             background-color: var(--focus);
+            padding-left: .5rem;
 
             .movement-header-label{
                 font-weight: 700;
@@ -469,6 +568,7 @@ input:focus + label {
             color: var(--black);
             
         }
+
     }
     
 }
@@ -498,11 +598,18 @@ input:focus + label {
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-        justify-content: flex-start;
+        justify-content: space-between;
         align-items: center;
         gap: .5rem;
     }
 
+}
+
+.section-amigos-rivais{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    width: 100%;
 }
 
 .contact-box{
@@ -513,6 +620,7 @@ input:focus + label {
     padding: 0.3rem;
 }
 .contact-label{
+    display: inline-block;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--black);
@@ -588,6 +696,14 @@ input:focus + label {
     flex-direction: row;
     gap: 1rem;
     margin-bottom: 1rem;
+    width: 100%;
+}
+
+.itens-group{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
 }
 
 .itens-container{
@@ -642,6 +758,7 @@ input:focus + label {
     font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
+    width: 5rem;
 }
 
 .checkbox-container {
@@ -961,8 +1078,7 @@ input:focus + label {
 }
 
 .heist-faction-row {
-    display: grid;
-    grid-template-columns: minmax(8rem, 1fr) minmax(12rem, 2fr) auto;
+    display: flex;
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0;
@@ -982,8 +1098,21 @@ input:focus + label {
 }
 
 .heist-faction-row button {
-    white-space: nowrap;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        background-color: var(--black);        
+        color: var(--white);
+        border: 2px solid var(--focus);
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+        padding: 0.5rem 1rem;
 }
+.heist-faction-row button:hover{
+        background-color: var(--light);
+        color: var(--black);
+    }
+
+
 
 .heist-empty-state {
     margin: 0;
@@ -1007,18 +1136,8 @@ input:focus + label {
     resize: vertical;
 }
 
-@media (max-width: 600px) {
-    .heist-faction-row {
-        grid-template-columns: minmax(0, 1fr) auto;
-    }
 
-    .heist-faction-row input:nth-child(2) {
-        grid-column: 1 / -1;
-        grid-row: 2;
-    }
-}
-
-@media (min-width: 768px) {
+@media (min-width: 800px) {
     nav{
         display: flex;
         flex-direction: row;
@@ -1029,7 +1148,7 @@ input:focus + label {
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
     }
     article{
         display: flex;
@@ -1038,6 +1157,15 @@ input:focus + label {
         gap: 1rem;
         align-items: flex-start;
         flex-wrap: nowrap;
+        width: 30vw;
     }
 
+        .heist-faction-row {
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .heist-faction-row input:nth-child(2) {
+        grid-column: 1 / -1;
+        grid-row: 2;
+    }
 }
