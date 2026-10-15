@@ -553,6 +553,7 @@
             {"regiao":"INSTITUIÇÕES", "nome":"A Brigada", "categoria":"ii", "controle":"Forte"},
             {"regiao":"INSTITUIÇÕES", "nome":"Consulado do Arquipélago das Adagas", "categoria":"i", "controle":"Forte"},
             {"regiao":"INSTITUIÇÕES", "nome":"Consulado Severosi", "categoria":"i", "controle":"Forte"},
+
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"A Fundação", "categoria":"iv", "controle":"Forte"},
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Estivadores", "categoria":"iii", "controle":"Forte"},
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Gondoleiros", "categoria":"iii", "controle":"Forte"},
@@ -563,6 +564,7 @@
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Libertintos", "categoria":"ii", "controle":"Precário"},
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Peões dos Trilhos", "categoria":"ii", "controle":"Precário"},
             {"regiao":"PROLETÁRIOS E COMÉRCIO", "nome":"Servos", "categoria":"ii", "controle":"Precário"},
+
             {"regiao":"CIDADANIA", "nome":"Coroa-Alva", "categoria":"v", "controle":"Forte"},
             {"regiao":"CIDADANIA", "nome":"Diamantina", "categoria":"iv", "controle":"Forte"},
             {"regiao":"CIDADANIA", "nome":"Câmara Oficial", "categoria":"iv", "controle":"Forte"},
@@ -584,6 +586,136 @@
             {"regiao":"PERIFERIA", "nome":"Legião da Morte", "categoria":"ii", "controle":"Precário"},
             {"regiao":"PERIFERIA", "nome":"A Dama Lacrimosa", "categoria":"ii", "controle":"Precário"}
         ]
-    }
+    },
 
+    "acoes": [
+        {
+            "nome": "Adulterar",
+            "tipo": "Esperteza",
+            "exemplos": [
+                "Você Adultera modificando aparelhos e mecanismos.",
+                "Você pode criar uma nova engenhoca ou alterar um item já existente.",
+                "Você pode abrir uma fechadura ou arrombar um cofre.",
+                "Você pode se aproveitar dos aparelhos mecânicos e electroplasmáticos pela cidade.",
+                "Você pode tentar usar o seu conhecimento técnico para controlar um veículo (embora Manejar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Brigar",
+            "tipo": "Valentia",
+            "exemplos": [
+                "Você Briga combatendo um alvo corpo a corpo, assim impedindo-o de fugir.",
+                "Você pode trocar socos ou agarrar seu alvo. Você pode cortar e apunhalar.",
+                "Você pode conquistar e defender uma posição estratégica em uma batalha.",
+                "Você pode tentar lutar em um duelo formal (embora Manejar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Caçar",
+            "tipo": "Esperteza",
+            "exemplos": [
+                "Você Caça rastreando ou seguindo cuidadosamente um alvo.",
+                "Você pode seguir um alvo ou procurar a sua localização atual.",
+                "Você pode preparar uma emboscada.",
+                "Você pode fazer disparos precisos à distância.",
+                "Você pode tentar usar armas de fogo em uma luta caótica (embora Briga possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Comandar",
+            "tipo": "Convicção",
+            "exemplos": [
+                "Você Comanda exigindo obediência rápida e inquestionável.",
+                "Você pode intimidar ou ameaçar para conseguir o que quer.",
+                "Você pode liderar uma gangue em uma ação de grupo.",
+                "Você pode tentar persuadir pessoas através de ordens e comandos (embora Socializar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Convencer",
+            "tipo": "Convicção",
+            "exemplos": [
+                "Você Convence influenciando pessoas com astúcia, bons argumentos ou charme.",
+                "Você pode mentir de maneira convincente. Você pode persuadir alguém para atender um pedido.",
+                "Você pode argumentar um caso de maneira eloquente sem deixar espaço para refutações.",
+                "Você pode tentar enganar pessoas, gerando obediência ou afeição (embora Comandar ou Socializar possam se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Detonar",
+            "tipo": "Valentia",
+            "exemplos": [
+                "Você Detona liberando forças irrefreáveis.",
+                "Você pode usar uma marreta (ou um explosivo) para derrubar uma porta ou quebrar uma parede.",
+                "Você pode usar caos e sabotagem para criar uma distração, ou superar um obstáculo.",
+                "Você pode tentar sobrepujar um inimigo com força bruta durante uma batalha (embora Briga possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Esgueirar",
+            "tipo": "Valentia",
+            "exemplos": [
+                "Você se Esgueira movendo-se cuidadosamente e em silêncio.",
+                "Você pode circundar um guarda, ou esconder-se nas sombras.",
+                "Você pode correr e saltar através dos telhados.",
+                "Você pode emboscar alguém com um golpe nas costas ou pancada na nuca.",
+                "Você pode tentar pegar uma vítima de surpresa no meio de uma batalha (embora Briga possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Estudar",
+            "tipo": "Esperteza",
+            "exemplos": [
+                "Você Estuda analisando detalhes e interpretando evidências.",
+                "Você pode levantar informações a partir de documentos, jornais e livros.",
+                "Você pode pesquisar assuntos esotéricos.",
+                "Você pode analisar cuidadosamente uma pessoa para detectar mentiras ou emoções verdadeiras.",
+                "Você pode tentar examinar eventos para compreender uma situação urgente (embora Sondar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Manejar",
+            "tipo": "Esperteza",
+            "exemplos": [
+                "Você Maneja manipulando um alvo através de destreza manual e distrações sutis.",
+                "Você pode furtar o conteúdo de bolsos.",
+                "Você pode manipular os controles de um veículo ou direcionar uma montaria.",
+                "Você pode participar de um duelo formal usando artes marciais graciosas.",
+                "Você pode tentar empregar essas mesmas artes em uma luta caótica (embora Briga possa se aplicar melhor).",
+                "Você pode tentar abrir uma fechadura (embora Adulterar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Sintonizar",
+            "tipo": "Convicção",
+            "exemplos": [
+                "Você Sintoniza abrindo a sua mente para poderes arcanos.",
+                "Você pode se comunicar com um fantasma ou compreender aspectos de espectrologia.",
+                "Você pode tentar empregar uma percepção extra-sensorial para compreender a sua situação (embora Sondar possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Socializar",
+            "tipo": "Convicção",
+            "exemplos": [
+                "Você Socializa confraternizando com amigos e contatos.",
+                "Você pode conseguir acesso a recursos, informações, pessoas ou lugares.",
+                "Você pode causar uma boa impressão ou encantar alguém com seu charme e estilo.",
+                "Você pode fazer novos amigos ou conectar-se as suas raízes ou histórico.",
+                "Você pode tentar manipular os seus amigos através de pressão social (embora Convencer possa se aplicar melhor)."
+            ]
+        },
+        {
+            "nome": "Sondar",
+            "tipo": "Esperteza",
+            "exemplos": [
+                "Você Sonda observando uma situação e antecipando vários possíveis resultados.",
+                "Você pode notar os sinais de perigo antes de ele acontecer.",
+                "Você pode descobrir oportunidades ou fraquezas inesperadas.",
+                "Você pode detectar as motivações, ou intenções de uma pessoa.",
+                "Você pode tentar encontrar um bom ponto para uma emboscada (embora Caçar possa se aplicar melhor)."
+            ]
+        }
+
+    ]
 }

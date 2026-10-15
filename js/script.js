@@ -16,9 +16,11 @@ if (path.endsWith('/') || path.endsWith('/index.html')) {
 } else if (path.endsWith('/heist.html')) {
     const { default: { HeistSheet } } = await import('./heist.js');
     mainScript = new HeistSheet();
+} else if (path.endsWith('/dming.html')) {
+    const { default: DmingSheet } = await import('./dming.js');
+    mainScript = new DmingSheet();
 } else {
     console.warn('No page module for path:', path);
 }
 
 export default mainScript; 
-
