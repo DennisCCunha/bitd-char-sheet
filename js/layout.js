@@ -12,6 +12,7 @@ function loadLayout() {
         <a class="nav-item nav-button" href="./index.html">Personagem</a>
         <a class="nav-item nav-button" href="./crew.html">Bando</a>
         <a class="nav-item nav-button" href="./heist.html">Golpe</a>
+        <a class="nav-item nav-button" href="./dming.html">Narrador</a>
       </div>
     `;
 
