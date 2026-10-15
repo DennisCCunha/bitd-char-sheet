@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <title id="pageTitle">Blades in the Dark - Escudo do Mestre </title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./clocks/clocks.css" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script type="module" src="./js/script.js" defer></script>
+        <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TCJEV9859Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-TCJEV9859Z');
+    </script>
+
+  </head>
+  <body>
+    <nav id="site-nav" class="floating-nav" >
+    </nav>
+
+    <main id="main" class="dming-page">
+      <header class="dming-hero">
+        <div>
+          <span class="eyebrow">Ferramentas do narrador</span>
+          <h1>Central do golpe</h1>
+          <p>Tenha à mão a posição, o efeito, as ameaças e os relógios que movem a ficção.</p>
+        </div>
+        <div class="dming-actions">
+          <button type="button" class="nav-button" id="dming-clear">Limpar sessão</button>
+        </div>
+      </header>
+
+      <section class="dming-session panel">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Resumo da cena</span>
+            <h2>Golpe em andamento</h2>
+          </div>
+          <span class="save-status" id="dming-save-status" aria-live="polite">Salvo localmente</span>
+        </div>
+        <div class="dming-fields">
+          <label>Nome do golpe<input id="dming-heist-name" type="text" placeholder="Ex.: O baile da Baronesa"></label>
+          <label>Objetivo<input id="dming-objective" type="text" placeholder="O que a equipe precisa conseguir?"></label>
+          <label>Local<input id="dming-location" type="text" placeholder="Onde a cena acontece?"></label>
+          <label>Alerta<input id="dming-alert" type="text" placeholder="Quem está prestes a perceber?"></label>
+        </div>
+      </section>
+
+      <div class="dming-columns">
+        <section class="panel action-matrix-panel">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Primeiro descreva uma ação ousada</span>
+              <h2>Rolagem de ação</h2>
+            </div>
+            <span class="matrix-selection" id="matrix-selection">Desfavorável · Limitado</span>
+          </div>
+          <p class="panel-intro">Defina a posição pelo risco e o efeito pelo que está em jogo. Clique em uma célula para marcar a rolagem atual.</p>
+          <div class="roll-workspace">
+            <aside class="action-options">
+              <h3>Opções de ação</h3>
+              <section>
+                <h4>Consiga Dados Extras</h4>
+                <p>Use <em>Esforço Extra</em> (pague 2 estresse) Ou aceite um <em>Acordo com o Diabo</em>. <em>=1d</em></p>
+                <p>Um aliado pode oferecer ajuda. O aliado paga 1 estresse. <em>+1d</em></p>
+              </section>
+              <section>
+                <h4>Maior efeito</h4>
+                <p>Use uma ferramenta, aceite mais risco ou gaste recursos.</p>
+              </section>
+              <section><h4>Ação de preparo</h4><p>A próxima ação recebe efeito maior ou posição melhor.</p></section>
+              <section><h4>Flashback</h4><p>Descreva algo preparado antes da cena e pague o custo adequado.</p></section>
+            </aside>
+            <div class="matrix-wrap">
+              <div class="matrix-caption">Então defina posição <strong>×</strong> efeito</div>
+              <div class="action-matrix" role="grid" aria-label="Matriz de posição e efeito">
+                <div class="matrix-corner">Efeito<br><span>↑</span></div>
+                <div class="matrix-axis">Controlada</div>
+                <div class="matrix-axis">Arriscada</div>
+                <div class="matrix-axis">Desesperada</div>
+                <button type="button" class="matrix-row-label" tabindex="-1">Extremo<br>efeito</button>
+                <button type="button" class="matrix-cell" data-position="Controlada" data-effect="Extremo">Extremo</button>
+                <button type="button" class="matrix-cell" data-position="Arriscada" data-effect="Extremo">Extremo</button>
+                <button type="button" class="matrix-cell position-risky" data-position="Desesperada" data-effect="Extremo">Extremo</button>
+                <button type="button" class="matrix-row-label" tabindex="-1">Grande<br>efeito</button>
+                <button type="button" class="matrix-cell" data-position="Controlada" data-effect="Grande">Grande</button>
+                <button type="button" class="matrix-cell" data-position="Arriscada" data-effect="Grande">Grande</button>
+                <button type="button" class="matrix-cell position-risky" data-position="Desesperada" data-effect="Grande">Grande</button>
+                <button type="button" class="matrix-row-label" tabindex="-1">Standard<br>efeito</button>
+                <button type="button" class="matrix-cell" data-position="Controlada" data-effect="Standard">Standard</button>
+                <button type="button" class="matrix-cell" data-position="Arriscada" data-effect="Standard">Standard</button>
+                <button type="button" class="matrix-cell position-risky" data-position="Desesperada" data-effect="Standard">Standard</button>
+                <button type="button" class="matrix-row-label" tabindex="-1">Limitado<br>efeito</button>
+                <button type="button" class="matrix-cell" data-position="Controlada" data-effect="Limitado">Limitado</button>
+                <button type="button" class="matrix-cell" data-position="Arriscada" data-effect="Limitado">Limitado</button>
+                <button type="button" class="matrix-cell position-risky" data-position="Desesperada" data-effect="Limitado">Limitado</button>
+                <button type="button" class="matrix-row-label" tabindex="-1">Sem<br>efeito</button>
+                <button type="button" class="matrix-cell" data-position="Controlada" data-effect="Sem efeito">Sem efeito</button>
+                <button type="button" class="matrix-cell" data-position="Arriscada" data-effect="Sem efeito">Sem efeito</button>
+                <button type="button" class="matrix-cell position-risky" data-position="Desesperada" data-effect="Sem efeito">Sem efeito</button>
+              </div>
+            </div>
+          </div>
+          <div class="matrix-notes">
+            <label>O que está em risco?<textarea id="dming-risk" rows="2" placeholder="Consequência provável se a rolagem falhar..."></textarea></label>
+            <label>Como aumentar o efeito?<textarea id="dming-effect-note" rows="2" placeholder="Qualidade, potência, escala ou oportunidade..."></textarea></label>
+          </div>
+        </section>
+
+        <section class="panel quick-reference-panel">
+          <div class="section-heading">
+            <div>
+              <span class="eyebrow">Consulta rápida</span>
+              <h2>Determine o resultado</h2>
+            </div>
+          </div>
+          <div class="reference-list">
+            <div class="outcome outcome-critical"><strong>Sucesso crítico</strong><span>6 + 6</span><p>Você consegue um efeito excepcional.</p></div>
+            <div class="outcome outcome-success"><strong>Sucesso</strong><span>6</span><p>A ação funciona com o efeito escolhido.</p></div>
+            <div class="outcome outcome-partial"><strong>Sucesso com consequência</strong><span>4/5</span><p>Você consegue, mas sofre uma consequência.</p></div>
+            <div class="outcome outcome-fail"><strong>Má notícia</strong><span>1–3</span><p>A consequência acontece. O narrador faz um movimento.</p></div>
+          </div>
+          <p class="outcome-note">Escolha a consequência mais interessante: dano, relógio, efeito reduzido, posição desesperada ou oportunidade perdida.</p>
+        </section>
+      </div>
+
+      <section class="panel dming-clocks-panel">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Pressão da ficção</span>
+            <h2>Relógios de obstáculos e eventos</h2>
+          </div>
+          <p class="section-hint">Laranja: ameaça ou obstáculo · Azul: progresso ou oportunidade</p>
+        </div>
+        <div id="dming-clocks"></div>
+      </section>
+
+      <div class="dming-columns dming-bottom">
+        <section class="panel">
+          <div class="section-heading"><h2>Fações e NPCs em cena</h2></div>
+          <textarea id="dming-factions" rows="6" placeholder="Nome — objetivo — atitude — recurso&#10;Ex.: Guardas — proteger o cofre — desconfiados — reforços a 4"></textarea>
+        </section>
+        <section class="panel">
+          <div class="section-heading"><h2>Pistas, descoberta e consequências</h2></div>
+          <textarea id="dming-notes" rows="6" placeholder="Registre fatos estabelecidos, perguntas abertas e consequências que ainda precisam aparecer."></textarea>
+        </section>
+      </div>
+    </main>
+
+    <!-- Modais são criados dinamicamente pela classe Modal (js/modal.js) -->
+    <div id="modalsContainer"></div>
+
+
+    <footer id="site-footer" class="rodape"></footer>
+    
+  </body>
+</html>
